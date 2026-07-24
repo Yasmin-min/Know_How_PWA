@@ -1,0 +1,428 @@
+.pagina {
+  --cor-primaria: #4f2edc;
+  --cor-primaria-hover: #4324b8;
+  --cor-primaria-bg: #f5f3ff;
+  --cor-aluno: #16a34a;
+  --cor-aluno-bg: #f0fdf4;
+  --cor-borda: #e2e0ee;
+  --cor-texto: #1f1b2e;
+  --cor-texto-secundario: #6b6880;
+  --cor-erro: #d92d20;
+  --raio: 12px;
+  --espaco: 16px;
+
+  min-height: 100vh;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--espaco);
+  background: linear-gradient(180deg, #f5f3ff 0%, #ffffff 45%);
+}
+
+.card {
+  width: 100%;
+  max-width: 440px;
+  box-sizing: border-box;
+  background: #ffffff;
+  border-radius: 20px;
+  border: 1px solid var(--cor-borda);
+  box-shadow: 0 20px 40px -20px rgba(79, 46, 220, 0.25);
+  padding: 32px 28px;
+}
+
+.botaoVoltar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  margin-bottom: 12px;
+  border: none;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--cor-texto-secundario);
+  cursor: pointer;
+  transition: background-color 0.15s, color 0.15s;
+}
+
+.botaoVoltar:hover {
+  background: var(--cor-primaria-bg);
+  color: var(--cor-texto);
+}
+
+.botaoVoltar:focus-visible {
+  outline: 2px solid var(--cor-primaria);
+  outline-offset: 2px;
+}
+
+.botaoVoltar svg {
+  width: 20px;
+  height: 20px;
+}
+
+.indicador {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.etapaItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.etapaCirculo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #ede9fe;
+  color: var(--cor-texto-secundario);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.etapaAtual {
+  background: var(--cor-primaria);
+  color: #ffffff;
+}
+
+.etapaConcluida {
+  background: var(--cor-primaria);
+  color: #ffffff;
+}
+
+.iconeCheck {
+  width: 16px;
+  height: 16px;
+}
+
+.etapaLabel {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--cor-texto-secundario);
+}
+
+.etapaLinha {
+  align-self: center;
+  width: 48px;
+  height: 2px;
+  margin-top: 16px;
+  background: var(--cor-borda);
+}
+
+.cabecalhoEtapa {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.tituloEtapa {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--cor-texto);
+  margin: 0 0 6px;
+}
+
+.textoEtapa {
+  font-size: 14px;
+  color: var(--cor-texto-secundario);
+  margin: 0;
+}
+
+.listaCartoes {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.cartaoPerfil {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 16px;
+  border-radius: var(--raio);
+  border: 1.5px solid var(--cor-borda);
+  background: #ffffff;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 0.15s, box-shadow 0.15s, background-color 0.15s;
+}
+
+.cartaoPerfil:hover {
+  border-color: #c9c5e0;
+}
+
+.cartaoPerfil:focus-visible {
+  outline: 2px solid var(--cor-primaria);
+  outline-offset: 2px;
+}
+
+.cartaoIcone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+}
+
+.cartaoIcone svg {
+  width: 24px;
+  height: 24px;
+}
+
+.cartaoProfessor .cartaoIcone {
+  background: var(--cor-primaria-bg);
+  color: var(--cor-primaria);
+}
+
+.cartaoAluno .cartaoIcone {
+  background: var(--cor-aluno-bg);
+  color: var(--cor-aluno);
+}
+
+.cartaoTextos {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+}
+
+.cartaoTitulo {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--cor-texto);
+}
+
+.cartaoProfessor.cartaoSelecionado .cartaoTitulo {
+  color: var(--cor-primaria);
+}
+
+.cartaoAluno.cartaoSelecionado .cartaoTitulo {
+  color: var(--cor-aluno);
+}
+
+.cartaoDescricao {
+  font-size: 13px;
+  color: var(--cor-texto-secundario);
+}
+
+.cartaoSeta {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  color: var(--cor-texto-secundario);
+}
+
+.cartaoProfessor.cartaoSelecionado {
+  border-color: var(--cor-primaria);
+  background: var(--cor-primaria-bg);
+  box-shadow: 0 0 0 3px rgba(79, 46, 220, 0.12);
+}
+
+.cartaoAluno.cartaoSelecionado {
+  border-color: var(--cor-aluno);
+  background: var(--cor-aluno-bg);
+  box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.12);
+}
+
+.textoAjuda {
+  margin: 20px 0 0;
+  font-size: 12px;
+  text-align: center;
+  color: var(--cor-texto-secundario);
+}
+
+.formulario {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espaco);
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--cor-texto);
+}
+
+.inputWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.inputIcone {
+  position: absolute;
+  left: 14px;
+  width: 18px;
+  height: 18px;
+  color: var(--cor-texto-secundario);
+  pointer-events: none;
+}
+
+.input {
+  width: 100%;
+  box-sizing: border-box;
+  height: 48px;
+  padding: 0 14px 0 42px;
+  border-radius: var(--raio);
+  border: 1px solid var(--cor-borda);
+  font-size: 15px;
+  color: var(--cor-texto);
+  background: #ffffff;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.input::placeholder {
+  color: #a8a5bb;
+}
+
+.input:hover {
+  border-color: #c9c5e0;
+}
+
+.input:focus-visible {
+  outline: none;
+  border-color: var(--cor-primaria);
+  box-shadow: 0 0 0 3px rgba(79, 46, 220, 0.15);
+}
+
+.input[aria-invalid="true"] {
+  border-color: var(--cor-erro);
+}
+
+.botaoOlho {
+  position: absolute;
+  right: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: transparent;
+  color: var(--cor-texto-secundario);
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+.botaoOlho:hover {
+  color: var(--cor-texto);
+  background: #f5f3ff;
+}
+
+.botaoOlho:focus-visible {
+  outline: 2px solid var(--cor-primaria);
+  outline-offset: 2px;
+}
+
+.botaoOlho svg {
+  width: 18px;
+  height: 18px;
+}
+
+.erroCampo {
+  font-size: 12px;
+  color: var(--cor-erro);
+}
+
+.textoDica {
+  font-size: 12px;
+  color: var(--cor-texto-secundario);
+}
+
+.erroApi {
+  font-size: 13px;
+  color: var(--cor-erro);
+  background: #fef3f2;
+  border: 1px solid #fecdca;
+  border-radius: var(--raio);
+  padding: 10px 12px;
+}
+
+.botaoEntrar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 48px;
+  border: none;
+  border-radius: var(--raio);
+  background: var(--cor-primaria);
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.15s, opacity 0.15s;
+}
+
+.botaoEntrar:hover:not(:disabled) {
+  background: var(--cor-primaria-hover);
+}
+
+.botaoEntrar:focus-visible {
+  outline: 2px solid var(--cor-primaria);
+  outline-offset: 2px;
+}
+
+.botaoEntrar:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.botaoEntrar:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.spinner {
+  width: 16px;
+  height: 16px;
+  animation: girar 0.8s linear infinite;
+}
+
+@keyframes girar {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.rodapeEntrar {
+  text-align: center;
+  margin: 4px 0 0;
+  font-size: 13px;
+  color: var(--cor-texto-secundario);
+}
+
+.rodapeEntrar a {
+  color: var(--cor-primaria);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.rodapeEntrar a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 480px) {
+  .card {
+    padding: 24px 18px;
+    border-radius: 16px;
+  }
+}

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import type { FormEvent } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { isAxiosError } from "axios";
 import rotas from "../../config/rotas";
 import { login } from "../../services/authService";
@@ -58,6 +58,8 @@ function mensagemErroApi(erro: unknown): string {
 
 function Login() {
   const navigate = useNavigate();
+  const location = useLocation();
+  const mensagemSucesso = (location.state as { mensagem?: string } | null)?.mensagem ?? null;
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -110,6 +112,12 @@ function Login() {
           <h2 className={styles.boasVindasTitulo}>Bem-vindo!</h2>
           <p className={styles.boasVindasTexto}>Faça login para continuar</p>
         </div>
+
+        {mensagemSucesso ? (
+          <div className={styles.sucessoApi} role="status">
+            {mensagemSucesso}
+          </div>
+        ) : null}
 
         <form className={styles.formulario} onSubmit={handleSubmit} noValidate>
           <div className={styles.campo}>
