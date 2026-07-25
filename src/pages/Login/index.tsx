@@ -4,6 +4,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { isAxiosError } from "axios";
 import rotas from "../../config/rotas";
 import { login } from "../../services/authService";
+import { TipoUsuario } from "../../types/auth";
 import { IconCapelo, IconEmail, IconCadeado, IconOlho, IconOlhoFechado } from "./icons";
 import styles from "./styles.module.css";
 
@@ -88,8 +89,8 @@ function Login() {
 
     setCarregando(true);
     try {
-      await login({ email, senha: password });
-      navigate(rotas.inicio);
+      const resposta = await login({ email, senha: password });
+      navigate(resposta.tipoUsuario === TipoUsuario.Aluno ? rotas.professores : rotas.inicio);
     } catch (erro) {
       setErroApi(mensagemErroApi(erro));
     } finally {

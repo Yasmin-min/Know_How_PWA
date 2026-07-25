@@ -1,3 +1,176 @@
 .container {
+  --cor-primaria: #4f2edc;
+  --cor-primaria-bg: #f5f3ff;
+  --cor-borda: #e5e4e7;
+  --cor-texto: #1f1b2e;
+  --cor-texto-secundario: #6b6880;
+
   min-height: 100vh;
+  background: #fafafa;
+}
+
+.cabecalho {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  height: 72px;
+  padding: 0 32px;
+  background: #ffffff;
+  border-bottom: 1px solid var(--cor-borda);
+  box-sizing: border-box;
+}
+
+.marca {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+  text-decoration: none;
+}
+
+.marcaLogo {
+  width: 30px;
+  height: 30px;
+  color: var(--cor-primaria);
+}
+
+.marcaTexto {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--cor-texto);
+  white-space: nowrap;
+}
+
+.marcaDestaque {
+  color: var(--cor-primaria);
+}
+
+.navegacao {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.navItem {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 38px;
+  padding: 0 12px;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--cor-texto-secundario);
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.15s, color 0.15s;
+}
+
+.navItem:hover {
+  background: var(--cor-primaria-bg);
+  color: var(--cor-primaria);
+}
+
+.navItem:focus-visible {
+  outline: 2px solid var(--cor-primaria);
+  outline-offset: 2px;
+}
+
+.navIcone {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.navBadge {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #e0455f;
+}
+
+.usuario {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+  margin-left: auto;
+  border: none;
+  background: transparent;
+  padding: 4px 6px 4px 4px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background-color 0.15s;
+}
+
+.usuario:hover {
+  background: #f4f3f6;
+}
+
+.usuario:focus-visible {
+  outline: 2px solid var(--cor-primaria);
+  outline-offset: 2px;
+}
+
+.usuarioAvatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--cor-primaria-bg);
+  color: var(--cor-primaria);
+  flex-shrink: 0;
+}
+
+.usuarioAvatarIcone {
+  width: 20px;
+  height: 20px;
+}
+
+.usuarioNome {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--cor-texto);
+  white-space: nowrap;
+}
+
+.usuarioChevron {
+  width: 16px;
+  height: 16px;
+  color: var(--cor-texto-secundario);
+  flex-shrink: 0;
+}
+
+@media (max-width: 900px) {
+  .navItem {
+    font-size: 0;
+    padding: 0 8px;
+  }
+
+  .usuarioNome {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .cabecalho {
+    padding: 0 16px;
+    gap: 12px;
+  }
+
+  .navegacao {
+    gap: 0;
+  }
 }

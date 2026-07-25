@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import rotas from "../../config/rotas";
 import { registrar } from "../../services/authService";
+import { TipoUsuario } from "../../types/auth";
 import type { TipoUsuario as TipoUsuarioType } from "../../types/auth";
 import EtapaPerfil from "./EtapaPerfil";
 import EtapaDados from "./EtapaDados";
@@ -14,7 +15,13 @@ function Cadastro() {
 
   const [etapa, setEtapa] = useState<Etapa>("perfil");
   const [tipoUsuario, setTipoUsuario] = useState<TipoUsuarioType | null>(null);
-  const [dados, setDados] = useState<DadosCadastro>({ nome: "", email: "", senha: "" });
+  const [dados, setDados] = useState<DadosCadastro>({
+    nome: "",
+    email: "",
+    senha: "",
+    dataNascimento: "",
+    cpf: "",
+  });
   const [errosCampos, setErrosCampos] = useState<ErrosDados>({});
   const [erroGeral, setErroGeral] = useState<string | null>(null);
   const [carregando, setCarregando] = useState(false);
@@ -32,7 +39,7 @@ function Cadastro() {
 
     setErroGeral(null);
 
-    const erros = validarDados(dados);
+    const erros = validarDados(dados, tipoUsuario);
     setErrosCampos(erros);
     if (Object.keys(erros).length > 0) return;
 
@@ -43,6 +50,8 @@ function Cadastro() {
         email: dados.email.trim(),
         senha: dados.senha,
         tipoUsuario,
+        dataNascimento: dados.dataNascimento,
+        ...(tipoUsuario === TipoUsuario.Professor ? { cpf: dados.cpf.replace(/\D/g, "") } : {}),
       });
 
       navigate(rotas.login, {
@@ -66,8 +75,9 @@ function Cadastro() {
             onSelecionar={selecionarPerfil}
             onVoltar={() => navigate(rotas.login)}
           />
-        ) : (
+        ) : tipoUsuario !== null ? (
           <EtapaDados
+            tipoUsuario={tipoUsuario}
             dados={dados}
             onChange={setDados}
             erros={errosCampos}
@@ -76,7 +86,7 @@ function Cadastro() {
             onVoltar={() => setEtapa("perfil")}
             onSubmit={enviarCadastro}
           />
-        )}
+        ) : null}
       </div>
     </div>
   );

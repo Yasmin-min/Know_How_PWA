@@ -3,12 +3,16 @@ import type { FormEvent } from "react";
 import { Link } from "react-router-dom";
 import rotas from "../../config/rotas";
 import { IconEmail, IconCadeado, IconOlho, IconOlhoFechado } from "../Login/icons";
-import { IconUsuario, IconSpinner } from "./icons";
-import { validarDados } from "./validacao";
+import { IconCalendario } from "../../base/BaseGeral/icons";
+import { IconUsuario, IconDocumento, IconSpinner } from "./icons";
+import { formatarCpf, validarDados } from "./validacao";
+import { TipoUsuario } from "../../types/auth";
+import type { TipoUsuario as TipoUsuarioType } from "../../types/auth";
 import type { DadosCadastro, ErrosDados } from "./types";
 import styles from "./styles.module.css";
 
 interface FormularioCadastroProps {
+  tipoUsuario: TipoUsuarioType;
   dados: DadosCadastro;
   onChange: (dados: DadosCadastro) => void;
   erros: ErrosDados;
@@ -21,26 +25,48 @@ interface CamposTocados {
   nome: boolean;
   email: boolean;
   senha: boolean;
+  dataNascimento: boolean;
+  cpf: boolean;
 }
 
-function FormularioCadastro({ dados, onChange, erros, erroGeral, carregando, onSubmit }: FormularioCadastroProps) {
+const HOJE_ISO = new Date().toISOString().split("T")[0];
+
+function FormularioCadastro({
+  tipoUsuario,
+  dados,
+  onChange,
+  erros,
+  erroGeral,
+  carregando,
+  onSubmit,
+}: FormularioCadastroProps) {
   const [mostrarSenha, setMostrarSenha] = useState(false);
-  const [tocados, setTocados] = useState<CamposTocados>({ nome: false, email: false, senha: false });
+  const [tocados, setTocados] = useState<CamposTocados>({
+    nome: false,
+    email: false,
+    senha: false,
+    dataNascimento: false,
+    cpf: false,
+  });
   const [enviado, setEnviado] = useState(false);
 
-  const errosLocais = validarDados(dados);
+  const ehProfessor = tipoUsuario === TipoUsuario.Professor;
+
+  const errosLocais = validarDados(dados, tipoUsuario);
   const errosExibidos: ErrosDados = { ...errosLocais, ...erros };
 
   const mostrarErroNome = (tocados.nome || enviado) && errosExibidos.nome;
   const mostrarErroEmail = (tocados.email || enviado) && errosExibidos.email;
   const mostrarErroSenha = (tocados.senha || enviado) && errosExibidos.senha;
+  const mostrarErroDataNascimento = (tocados.dataNascimento || enviado) && errosExibidos.dataNascimento;
+  const mostrarErroCpf = (tocados.cpf || enviado) && errosExibidos.cpf;
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (carregando) return;
 
     setEnviado(true);
-    setTocados({ nome: true, email: true, senha: true });
+    setTocados({ nome: true, email: true, senha: true, dataNascimento: true, cpf: true });
 
     if (Object.keys(errosLocais).length > 0) return;
 
@@ -141,6 +167,61 @@ function FormularioCadastro({ dados, onChange, erros, erroGeral, carregando, onS
           </span>
         )}
       </div>
+
+      <div className={styles.campo}>
+        <label className={styles.label} htmlFor="dataNascimento">
+          Data de nascimento
+        </label>
+        <div className={styles.inputWrapper}>
+          <IconCalendario className={styles.inputIcone} />
+          <input
+            id="dataNascimento"
+            name="dataNascimento"
+            type="date"
+            className={styles.input}
+            max={HOJE_ISO}
+            value={dados.dataNascimento}
+            onChange={(e) => onChange({ ...dados, dataNascimento: e.target.value })}
+            onBlur={() => setTocados((t) => ({ ...t, dataNascimento: true }))}
+            aria-invalid={Boolean(mostrarErroDataNascimento)}
+            aria-describedby={mostrarErroDataNascimento ? "dataNascimento-erro" : undefined}
+          />
+        </div>
+        {mostrarErroDataNascimento ? (
+          <span id="dataNascimento-erro" className={styles.erroCampo} role="alert">
+            {errosExibidos.dataNascimento}
+          </span>
+        ) : null}
+      </div>
+
+      {ehProfessor ? (
+        <div className={styles.campo}>
+          <label className={styles.label} htmlFor="cpf">
+            CPF
+          </label>
+          <div className={styles.inputWrapper}>
+            <IconDocumento className={styles.inputIcone} />
+            <input
+              id="cpf"
+              name="cpf"
+              type="text"
+              inputMode="numeric"
+              className={styles.input}
+              placeholder="000.000.000-00"
+              value={dados.cpf}
+              onChange={(e) => onChange({ ...dados, cpf: formatarCpf(e.target.value) })}
+              onBlur={() => setTocados((t) => ({ ...t, cpf: true }))}
+              aria-invalid={Boolean(mostrarErroCpf)}
+              aria-describedby={mostrarErroCpf ? "cpf-erro" : undefined}
+            />
+          </div>
+          {mostrarErroCpf ? (
+            <span id="cpf-erro" className={styles.erroCampo} role="alert">
+              {errosExibidos.cpf}
+            </span>
+          ) : null}
+        </div>
+      ) : null}
 
       {erroGeral ? (
         <div className={styles.erroApi} role="alert">

@@ -1,10 +1,12 @@
 import IndicadorProgresso from "./IndicadorProgresso";
 import FormularioCadastro from "./FormularioCadastro";
 import { IconVoltar } from "./icons";
+import type { TipoUsuario as TipoUsuarioType } from "../../types/auth";
 import type { DadosCadastro, ErrosDados } from "./types";
 import styles from "./styles.module.css";
 
 interface EtapaDadosProps {
+  tipoUsuario: TipoUsuarioType;
   dados: DadosCadastro;
   onChange: (dados: DadosCadastro) => void;
   erros: ErrosDados;
@@ -14,7 +16,16 @@ interface EtapaDadosProps {
   onSubmit: () => void;
 }
 
-function EtapaDados({ dados, onChange, erros, erroGeral, carregando, onVoltar, onSubmit }: EtapaDadosProps) {
+function EtapaDados({
+  tipoUsuario,
+  dados,
+  onChange,
+  erros,
+  erroGeral,
+  carregando,
+  onVoltar,
+  onSubmit,
+}: EtapaDadosProps) {
   return (
     <>
       <button
@@ -34,6 +45,7 @@ function EtapaDados({ dados, onChange, erros, erroGeral, carregando, onVoltar, o
       </div>
 
       <FormularioCadastro
+        tipoUsuario={tipoUsuario}
         dados={dados}
         onChange={onChange}
         erros={erros}

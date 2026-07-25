@@ -5,6 +5,7 @@ const rotas = {
   recuperarSenha: "/recuperar-senha",
   termos: "/termos",
   privacidade: "/privacidade",
+  professores: "/professores",
 };
 
 export default rotas;

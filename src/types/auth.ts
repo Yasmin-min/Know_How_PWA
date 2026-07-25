@@ -26,6 +26,8 @@ export interface RegistroRequest {
   email: string;
   senha: string;
   tipoUsuario: TipoUsuario;
+  dataNascimento: string;
+  cpf?: string;
 }
 
 export interface EditarUsuarioRequest {
