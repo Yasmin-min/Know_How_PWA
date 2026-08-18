@@ -1,7 +1,9 @@
 const rotas = {
-  login: "/",
-  inicio: "/inicio",
+  login: "/login",
+  inicio: "/",
   cadastroPerfil: "/cadastro/perfil",
+  cadastroAluno: "/cadastro/aluno",
+  cadastroProfessor: "/cadastro/professor",
   recuperarSenha: "/recuperar-senha",
   termos: "/termos",
   privacidade: "/privacidade",
