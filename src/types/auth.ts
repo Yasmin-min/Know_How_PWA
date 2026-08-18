@@ -28,6 +28,11 @@ export interface RegistroRequest {
   tipoUsuario: TipoUsuario;
   dataNascimento: string;
   cpf?: string;
+  areaInteresse?: string;
+  areaEspecialidade?: string;
+  anosExperiencia?: string;
+  miniBiografia?: string;
+  fotoPerfilBase64?: string;
 }
 
 export interface EditarUsuarioRequest {

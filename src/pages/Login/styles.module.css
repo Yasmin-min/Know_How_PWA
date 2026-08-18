@@ -5,7 +5,9 @@
   --cor-texto: #1f1b2e;
   --cor-texto-secundario: #6b6880;
   --cor-erro: #d92d20;
-  --raio: 12px;
+  --cor-destaque: #22d3ee;
+  --cor-professor: #0d9488;
+  --raio: 10px;
   --espaco: 16px;
 
   min-height: 100vh;
@@ -14,66 +16,155 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: var(--espaco);
-  background: linear-gradient(180deg, #f5f3ff 0%, #ffffff 45%);
+  padding: 24px;
+  background: #17151f;
 }
 
-.card {
+.container {
+  display: flex;
   width: 100%;
-  max-width: 440px;
+  max-width: 1040px;
+  min-height: 620px;
   box-sizing: border-box;
   background: #ffffff;
   border-radius: 20px;
-  border: 1px solid var(--cor-borda);
-  box-shadow: 0 20px 40px -20px rgba(79, 46, 220, 0.25);
-  padding: 32px 28px;
+  overflow: hidden;
+  box-shadow: 0 30px 60px -30px rgba(0, 0, 0, 0.5);
 }
 
-.identidade {
-  text-align: center;
-  margin-bottom: 24px;
+.painelEsquerdo {
+  position: relative;
+  flex: 0 0 40%;
+  overflow: hidden;
+  background: linear-gradient(160deg, #5339e6 0%, #3a22c4 100%);
+  color: #ffffff;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
 }
 
-.logo {
-  width: 56px;
-  height: 56px;
-  color: var(--cor-primaria);
-  margin-bottom: 8px;
+.decorCirculo1,
+.decorCirculo2 {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.06);
+  pointer-events: none;
 }
 
-.titulo {
-  font-size: 24px;
+.decorCirculo1 {
+  width: 320px;
+  height: 320px;
+  top: -120px;
+  right: -140px;
+}
+
+.decorCirculo2 {
+  width: 220px;
+  height: 220px;
+  bottom: -100px;
+  left: -80px;
+}
+
+.marca {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.marcaLogo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 9px;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.marcaLogo svg {
+  width: 18px;
+  height: 18px;
+}
+
+.marcaTexto {
+  font-size: 17px;
   font-weight: 700;
-  color: var(--cor-texto);
+}
+
+.marcaDestaque {
+  color: var(--cor-destaque);
+}
+
+.painelConteudo {
+  position: relative;
+  margin-top: auto;
+  margin-bottom: auto;
+  padding-top: 64px;
+}
+
+.painelTitulo {
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.25;
+  margin: 0 0 12px;
+}
+
+.painelTexto {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.75);
+  margin: 0 0 28px;
+}
+
+.listaBeneficios {
+  list-style: none;
   margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
 }
 
-.destaque {
-  color: var(--cor-primaria);
+.listaBeneficios li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13.5px;
+  color: rgba(255, 255, 255, 0.9);
 }
 
-.subtitulo {
-  margin: 4px 0 0;
-  font-size: 13px;
-  color: var(--cor-texto-secundario);
+.iconBeneficio {
+  flex: 0 0 auto;
+  width: 18px;
+  height: 18px;
+  color: var(--cor-destaque);
 }
 
-.boasVindas {
-  text-align: center;
-  margin-bottom: 20px;
+.painelDireito {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  box-sizing: border-box;
 }
 
-.boasVindasTitulo {
-  font-size: 18px;
-  font-weight: 600;
+.formularioWrapper {
+  width: 100%;
+  max-width: 340px;
+}
+
+.tituloForm {
+  font-size: 22px;
+  font-weight: 700;
   color: var(--cor-texto);
   margin: 0 0 4px;
 }
 
-.boasVindasTexto {
-  font-size: 14px;
+.subtituloForm {
+  font-size: 13.5px;
   color: var(--cor-texto-secundario);
-  margin: 0;
+  margin: 0 0 24px;
 }
 
 .formulario {
@@ -94,32 +185,31 @@
   color: var(--cor-texto);
 }
 
+.obrigatorio {
+  color: var(--cor-erro);
+}
+
 .inputWrapper {
   position: relative;
   display: flex;
   align-items: center;
 }
 
-.inputIcone {
-  position: absolute;
-  left: 14px;
-  width: 18px;
-  height: 18px;
-  color: var(--cor-texto-secundario);
-  pointer-events: none;
-}
-
 .input {
   width: 100%;
   box-sizing: border-box;
-  height: 48px;
-  padding: 0 14px 0 42px;
+  height: 44px;
+  padding: 0 14px;
   border-radius: var(--raio);
   border: 1px solid var(--cor-borda);
-  font-size: 15px;
+  font-size: 14px;
   color: var(--cor-texto);
   background: #ffffff;
   transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.inputWrapper .input {
+  padding-right: 42px;
 }
 
 .input::placeholder {
@@ -146,8 +236,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 32px;
-  height: 32px;
+  width: 30px;
+  height: 30px;
   border: none;
   background: transparent;
   color: var(--cor-texto-secundario);
@@ -166,8 +256,8 @@
 }
 
 .botaoOlho svg {
-  width: 18px;
-  height: 18px;
+  width: 17px;
+  height: 17px;
 }
 
 .erroCampo {
@@ -177,7 +267,7 @@
 
 .linkEsqueciSenha {
   align-self: flex-end;
-  font-size: 13px;
+  font-size: 12.5px;
   color: var(--cor-primaria);
   text-decoration: none;
   margin-top: -8px;
@@ -214,12 +304,12 @@
 }
 
 .botaoEntrar {
-  height: 48px;
+  height: 44px;
   border: none;
   border-radius: var(--raio);
   background: var(--cor-primaria);
   color: #ffffff;
-  font-size: 15px;
+  font-size: 14.5px;
   font-weight: 600;
   cursor: pointer;
   transition: background-color 0.15s, opacity 0.15s;
@@ -243,69 +333,86 @@
   cursor: not-allowed;
 }
 
-.separador {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  color: var(--cor-texto-secundario);
-  font-size: 12px;
-  margin: 2px 0;
-}
-
-.separador::before,
-.separador::after {
-  content: "";
-  flex: 1;
+.divisor {
   height: 1px;
   background: var(--cor-borda);
+  margin: 24px 0 14px;
 }
 
-.botaoCadastrar {
+.textoConta {
+  text-align: center;
+  font-size: 13px;
+  color: var(--cor-texto-secundario);
+  margin: 0 0 14px;
+}
+
+.opcoesCadastro {
+  display: flex;
+  gap: 10px;
+}
+
+.botaoPerfil {
+  flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 48px;
+  gap: 8px;
+  height: 42px;
   border-radius: var(--raio);
-  border: 1.5px solid var(--cor-primaria);
-  color: var(--cor-primaria);
-  font-size: 15px;
+  border: 1px solid var(--cor-borda);
+  color: var(--cor-texto);
+  font-size: 13.5px;
   font-weight: 600;
   text-decoration: none;
-  transition: background-color 0.15s;
+  transition: background-color 0.15s, border-color 0.15s;
 }
 
-.botaoCadastrar:hover {
-  background: #f5f3ff;
+.botaoPerfil:hover {
+  background: #f7f7fb;
+  border-color: #c9c5e0;
 }
 
-.botaoCadastrar:focus-visible {
+.botaoPerfil:focus-visible {
   outline: 2px solid var(--cor-primaria);
   outline-offset: 2px;
 }
 
-.rodape {
-  text-align: center;
-  margin-top: 20px;
-  font-size: 12px;
-  color: var(--cor-texto-secundario);
+.botaoPerfil svg {
+  width: 16px;
+  height: 16px;
 }
 
-.rodape p {
-  margin: 2px 0;
-}
-
-.rodape a {
+.iconPerfilAluno {
   color: var(--cor-primaria);
-  text-decoration: none;
 }
 
-.rodape a:hover {
-  text-decoration: underline;
+.iconPerfilProfessor {
+  color: var(--cor-professor);
+}
+
+@media (max-width: 860px) {
+  .painelEsquerdo {
+    display: none;
+  }
+
+  .container {
+    max-width: 440px;
+    min-height: 0;
+  }
+
+  .painelDireito {
+    padding: 32px 24px;
+  }
 }
 
 @media (max-width: 480px) {
-  .card {
-    padding: 24px 18px;
-    border-radius: 16px;
+  .pagina {
+    padding: 0;
+  }
+
+  .container {
+    border-radius: 0;
+    box-shadow: none;
+    min-height: 100vh;
   }
 }

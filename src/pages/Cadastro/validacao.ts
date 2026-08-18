@@ -26,7 +26,7 @@ export function formatarCpf(valor: string): string {
     .replace(/(\d{3})(\d{1,2})$/, "$1-$2");
 }
 
-function cpfValido(cpf: string): boolean {
+export function cpfValido(cpf: string): boolean {
   const digitos = cpf.replace(/\D/g, "");
   if (digitos.length !== 11 || /^(\d)\1{10}$/.test(digitos)) return false;
 
