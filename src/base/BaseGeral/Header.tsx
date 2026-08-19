@@ -15,7 +15,7 @@ function Header() {
       <Link to={rotas.inicio} className={styles.marca}>
         <IconCapelo className={styles.marcaLogo} />
         <span className={styles.marcaTexto}>
-          Know <span className={styles.marcaDestaque}>Hom</span>
+          Know<span className={styles.marcaDestaque}>How</span>
         </span>
       </Link>
 

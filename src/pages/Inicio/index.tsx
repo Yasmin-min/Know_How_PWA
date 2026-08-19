@@ -86,7 +86,7 @@ function Inicio() {
         <Link to={rotas.inicio} className={styles.marca}>
           <IconLogoMarca className={styles.marcaLogo} />
           <span className={styles.marcaTexto}>
-            Know<span className={styles.marcaDestaque}>Flow</span>
+            Know<span className={styles.marcaDestaque}>How</span>
           </span>
         </Link>
 
@@ -167,7 +167,7 @@ function Inicio() {
             Uma ponte entre quem quer aprender e quem sabe ensinar
           </h2>
           <p className={styles.textoSecao}>
-            O KnowFlow aproxima quem quer desenvolver uma habilidade de quem tem a experiência
+            O KnowHow aproxima quem quer desenvolver uma habilidade de quem tem a experiência
             prática para ensinar. Sem mais dificuldade para compartilhar ou trocar conhecimento:
             aqui, quem sabe fazer encontra quem quer aprender e a conexão acontece.
           </p>
@@ -277,7 +277,7 @@ function Inicio() {
           <div className={styles.rodapeLogo}>
             <IconLogoMarca className={styles.rodapeLogoIcone} />
             <span className={styles.rodapeLogoTexto}>
-              Know<span className={styles.marcaDestaque}>Flow</span>
+              Know<span className={styles.marcaDestaque}>How</span>
             </span>
           </div>
           <p className={styles.rodapeTexto}>
@@ -294,7 +294,7 @@ function Inicio() {
         </nav>
 
         <div className={styles.rodapeCopyright}>
-          © {new Date().getFullYear()} KnowFlow — Plataforma dedicada ao aprendizado
+          © {new Date().getFullYear()} KnowHow — Plataforma dedicada ao aprendizado
           personalizado.
         </div>
       </footer>
