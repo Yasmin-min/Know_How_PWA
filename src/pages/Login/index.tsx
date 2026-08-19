@@ -97,7 +97,7 @@ function Login() {
     setCarregando(true);
     try {
       const resposta = await login({ email, senha: password });
-      navigate(resposta.tipoUsuario === TipoUsuario.Aluno ? rotas.professores : rotas.inicio);
+      navigate(resposta.tipoUsuario === TipoUsuario.Aluno ? rotas.professores : rotas.professorPainel);
     } catch (erro) {
       setErroApi(mensagemErroApi(erro));
     } finally {
