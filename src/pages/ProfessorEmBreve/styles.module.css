@@ -1,0 +1,65 @@
+.pagina {
+  --cor-primaria: #14b8a6;
+  --cor-primaria-bg: rgba(20, 184, 166, 0.14);
+  --cor-borda: #e6e8eb;
+  --cor-texto: #12161c;
+  --cor-texto-secundario: #6b7280;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 420px;
+  margin: 80px auto;
+  padding: 40px 32px;
+  border-radius: 16px;
+  border: 1px solid var(--cor-borda);
+  background: #ffffff;
+}
+
+.icone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  margin-bottom: 16px;
+  border-radius: 14px;
+  background: var(--cor-primaria-bg);
+  color: var(--cor-primaria);
+}
+
+.icone svg {
+  width: 26px;
+  height: 26px;
+}
+
+.titulo {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--cor-texto);
+  margin: 0 0 6px;
+}
+
+.texto {
+  font-size: 14px;
+  color: var(--cor-texto-secundario);
+  margin: 0 0 20px;
+}
+
+.link {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--cor-primaria);
+  text-decoration: none;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+.link:focus-visible {
+  outline: 2px solid var(--cor-primaria);
+  outline-offset: 2px;
+  border-radius: 4px;
+}

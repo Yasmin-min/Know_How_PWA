@@ -1,0 +1,93 @@
+import type { ProfessorDashboardDTO } from "../../types/professorDashboard";
+
+export const DASHBOARD_MOCK: ProfessorDashboardDTO = {
+  indicadores: {
+    aulasAtivas: 12,
+    alunos: 48,
+    avaliacaoMedia: 4.9,
+    aulasSemana: 8,
+  },
+  especialidade: "Professor de Desenvolvimento Web",
+  proximasAulas: [
+    {
+      id: "aula-1",
+      titulo: "Introdução ao React",
+      dataDia: "20",
+      dataMes: "MAI",
+      diaSemanaHorario: "Terça-feira • 14:00 - 15:30",
+      totalAlunos: 5,
+      status: "confirmada",
+    },
+    {
+      id: "aula-2",
+      titulo: "JavaScript Avançado",
+      dataDia: "22",
+      dataMes: "MAI",
+      diaSemanaHorario: "Quinta-feira • 19:00 - 20:30",
+      totalAlunos: 3,
+      status: "agendada",
+    },
+    {
+      id: "aula-3",
+      titulo: "Projeto Final",
+      dataDia: "24",
+      dataMes: "MAI",
+      diaSemanaHorario: "Sábado • 10:00 - 12:00",
+      totalAlunos: 4,
+      status: "agendada",
+    },
+  ],
+  atividadesRecentes: [
+    {
+      id: "atividade-1",
+      tipo: "avaliacao",
+      nomePessoa: "Ana Beatriz",
+      titulo: "Ana Beatriz avaliou sua aula",
+      detalhe: "React Hooks na Prática",
+      quandoTexto: "há 2h",
+      avaliacaoEstrelas: 5,
+    },
+    {
+      id: "atividade-2",
+      tipo: "novoAluno",
+      nomePessoa: "Gabriel Oliveira",
+      titulo: "Novo aluno inscrito",
+      detalhe: "Gabriel Oliveira se inscreveu",
+      quandoTexto: "há 5h",
+    },
+    {
+      id: "atividade-3",
+      tipo: "mensagem",
+      nomePessoa: "Lucas Silva",
+      titulo: "Mensagem de Lucas Silva",
+      detalhe: "Sobre a aula de sábado",
+      quandoTexto: "há 1d",
+    },
+  ],
+  minhasAulas: [
+    {
+      id: 1,
+      titulo: "Introdução ao React",
+      descricao: "Do zero ao primeiro projeto",
+      totalAlunos: 12,
+      status: "ativa",
+      capaVariante: "react",
+    },
+    {
+      id: 2,
+      titulo: "JavaScript Completo",
+      descricao: "Fundamentos ao avançado",
+      totalAlunos: 18,
+      status: "ativa",
+      capaVariante: "javascript",
+    },
+    {
+      id: 3,
+      titulo: "Node.js para Iniciantes",
+      descricao: "Backend com JavaScript",
+      totalAlunos: 9,
+      status: "ativa",
+      capaVariante: "node",
+    },
+  ],
+};

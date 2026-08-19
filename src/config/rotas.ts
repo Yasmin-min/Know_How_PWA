@@ -8,6 +8,16 @@ const rotas = {
   termos: "/termos",
   privacidade: "/privacidade",
   professores: "/professores",
+  professorPainel: "/professor",
+  professorAulas: "/professor/aulas",
+  professorAulaNova: "/professor/aulas/nova",
+  professorAlunos: "/professor/alunos",
+  professorAgenda: "/professor/agenda",
+  professorMensagens: "/professor/mensagens",
+  professorPlanos: "/professor/planos",
+  professorAvaliacoes: "/professor/avaliacoes",
+  professorConfiguracoes: "/professor/configuracoes",
+  professorPerfil: "/professor/perfil",
 };
 
 export default rotas;

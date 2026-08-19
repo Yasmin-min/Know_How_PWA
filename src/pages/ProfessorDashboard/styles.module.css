@@ -1,0 +1,778 @@
+.pagina {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding-bottom: 24px;
+}
+
+.cabecalho {
+  margin-top: 4px;
+}
+
+.titulo {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--ph-texto);
+  margin: 0 0 4px;
+}
+
+.subtitulo {
+  font-size: 14.5px;
+  color: var(--ph-texto-secundario);
+  margin: 0;
+}
+
+.erro {
+  padding: 16px 18px;
+  border-radius: var(--ph-raio-sm);
+  border: 1px solid #fecdca;
+  background: #fef3f2;
+  color: #d92d20;
+  font-size: 14px;
+}
+
+/* Indicadores */
+.gradeIndicadores {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.cartaoIndicador {
+  padding: 22px;
+  border-radius: var(--ph-raio);
+  border: 1px solid var(--ph-border);
+  background: var(--ph-card-bg);
+  box-shadow: 0 1px 2px rgba(16, 15, 20, 0.03);
+}
+
+.indicadorIcone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  margin-bottom: 14px;
+  border-radius: 12px;
+}
+
+.indicadorIcone svg {
+  width: 22px;
+  height: 22px;
+}
+
+.indicadorTeal {
+  background: rgba(20, 184, 166, 0.14);
+  color: #0d9488;
+}
+
+.indicadorRoxo {
+  background: #ede9fe;
+  color: #7c3aed;
+}
+
+.indicadorAmarelo {
+  background: #fef3c7;
+  color: #d97706;
+}
+
+.indicadorAzul {
+  background: #dbeafe;
+  color: #2563eb;
+}
+
+.indicadorValor {
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--ph-texto);
+  margin: 0;
+}
+
+.indicadorRotulo {
+  font-size: 13.5px;
+  color: var(--ph-texto-secundario);
+  margin: 2px 0 14px;
+}
+
+.indicadorLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ph-accent);
+  text-decoration: none;
+}
+
+.indicadorLink:hover {
+  text-decoration: underline;
+}
+
+.indicadorLink:focus-visible {
+  outline: 2px solid var(--ph-accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.indicadorLinkIcone {
+  width: 13px;
+  height: 13px;
+}
+
+/* Cartões de seção (Próximas aulas / Atividade recente) */
+.gradeSecoes {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: 20px;
+  align-items: start;
+}
+
+.cartaoSecao {
+  padding: 22px;
+  border-radius: var(--ph-raio);
+  border: 1px solid var(--ph-border);
+  background: var(--ph-card-bg);
+  box-shadow: 0 1px 2px rgba(16, 15, 20, 0.03);
+}
+
+.cartaoSecaoTopo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.cartaoSecaoTitulo {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--ph-texto);
+  margin: 0;
+}
+
+.cartaoSecaoLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ph-accent);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.cartaoSecaoLink:hover {
+  text-decoration: underline;
+}
+
+.cartaoSecaoLink:focus-visible {
+  outline: 2px solid var(--ph-accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.cartaoSecaoLinkIcone {
+  width: 13px;
+  height: 13px;
+}
+
+.cartaoSecaoLinkRodape {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 16px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ph-accent);
+  text-decoration: none;
+}
+
+.cartaoSecaoLinkRodape:hover {
+  text-decoration: underline;
+}
+
+.cartaoSecaoLinkRodape:focus-visible {
+  outline: 2px solid var(--ph-accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.vazioSecao {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 32px 12px;
+  color: var(--ph-texto-secundario);
+}
+
+.vazioSecaoTexto {
+  font-size: 14px;
+  margin: 0 0 14px;
+}
+
+.vazioSecaoBotao {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 40px;
+  padding: 0 16px;
+  border-radius: var(--ph-raio-sm);
+  border: none;
+  background: var(--ph-accent);
+  color: #ffffff;
+  font-size: 13.5px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.vazioSecaoBotao:hover {
+  opacity: 0.92;
+}
+
+.vazioSecaoBotao:focus-visible {
+  outline: 2px solid var(--ph-accent);
+  outline-offset: 2px;
+}
+
+.vazioSecaoBotaoIcone {
+  width: 16px;
+  height: 16px;
+}
+
+/* Lista de próximas aulas */
+.listaAulas {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.listaAulas li + li {
+  border-top: 1px solid var(--ph-border);
+}
+
+.itemAula {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 4px;
+  text-decoration: none;
+  color: inherit;
+  border-radius: 10px;
+  transition: background-color 0.15s;
+}
+
+.itemAula:hover {
+  background: #f9fafb;
+}
+
+.itemAula:focus-visible {
+  outline: 2px solid var(--ph-accent);
+  outline-offset: -2px;
+}
+
+.itemAulaData {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
+  background: #f4f5f7;
+}
+
+.itemAulaMes {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--ph-texto-secundario);
+}
+
+.itemAulaDia {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--ph-texto);
+}
+
+.itemAulaInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.itemAulaTitulo {
+  font-size: 14.5px;
+  font-weight: 700;
+  color: var(--ph-texto);
+  margin: 0 0 2px;
+}
+
+.itemAulaHorario {
+  font-size: 13px;
+  color: var(--ph-texto-secundario);
+  margin: 0 0 8px;
+}
+
+.itemAulaAlunos {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.avataresAlunos {
+  display: flex;
+}
+
+.avatarAlunoPlaceholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  margin-left: -6px;
+  border-radius: 50%;
+  border: 2px solid var(--ph-card-bg);
+  background: #ede9fe;
+  color: #7c3aed;
+}
+
+.avatarAlunoPlaceholder:first-child {
+  margin-left: 0;
+}
+
+.avatarAlunoPlaceholder svg {
+  width: 11px;
+  height: 11px;
+}
+
+.itemAulaAlunosTexto {
+  font-size: 12.5px;
+  color: var(--ph-texto-secundario);
+}
+
+.statusPill {
+  flex-shrink: 0;
+  padding: 5px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.statusConfirmada {
+  background: #d1fae5;
+  color: #059669;
+}
+
+.statusAgendada {
+  background: #dbeafe;
+  color: #2563eb;
+}
+
+.statusRascunho {
+  background: #f4f3f6;
+  color: #6b7280;
+}
+
+.statusCancelada {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.itemAulaSeta {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  color: var(--ph-texto-secundario);
+}
+
+/* Atividade recente */
+.listaAtividades {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.itemAtividade {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.atividadeIcone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+}
+
+.atividadeIcone svg {
+  width: 17px;
+  height: 17px;
+}
+
+.atividadeIconeAmarelo {
+  background: #fef3c7;
+  color: #d97706;
+}
+
+.atividadeIconeTeal {
+  background: rgba(20, 184, 166, 0.14);
+  color: #0d9488;
+}
+
+.atividadeIconeAzul {
+  background: #dbeafe;
+  color: #2563eb;
+}
+
+.atividadeInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.atividadeTopo {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.atividadeTitulo {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--ph-texto);
+  margin: 0;
+}
+
+.atividadeQuando {
+  flex-shrink: 0;
+  font-size: 12px;
+  color: var(--ph-texto-secundario);
+}
+
+.atividadeDetalhe {
+  font-size: 13px;
+  color: var(--ph-texto-secundario);
+  margin: 2px 0 0;
+}
+
+.atividadeAvaliacao {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  flex-shrink: 0;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ph-texto);
+}
+
+.atividadeAvaliacaoIcone {
+  width: 13px;
+  height: 13px;
+  color: #f5a623;
+}
+
+/* Minhas aulas */
+.secaoMinhasAulas {
+  display: flex;
+  flex-direction: column;
+}
+
+.minhasAulasAcoes {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.botaoNovaAula {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 40px;
+  padding: 0 18px;
+  border-radius: var(--ph-raio-sm);
+  background: var(--ph-accent);
+  color: #ffffff;
+  font-size: 13.5px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: opacity 0.15s;
+}
+
+.botaoNovaAula:hover {
+  opacity: 0.92;
+}
+
+.botaoNovaAula:focus-visible {
+  outline: 2px solid var(--ph-accent);
+  outline-offset: 2px;
+}
+
+.botaoNovaAulaIcone {
+  width: 15px;
+  height: 15px;
+}
+
+.gradeAulas {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  margin-top: 18px;
+}
+
+.cartaoAula {
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--ph-raio);
+  border: 1px solid var(--ph-border);
+  background: var(--ph-card-bg);
+  overflow: hidden;
+  box-shadow: 0 1px 2px rgba(16, 15, 20, 0.03);
+}
+
+.capaAula {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 110px;
+}
+
+.capaAulaAlunos {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.45);
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.capaReact {
+  background: radial-gradient(circle, #0f2a44 0%, #08131f 100%);
+}
+
+.capaReact .capaAulaMarcaIcone {
+  width: 48px;
+  height: 48px;
+  color: #61dafb;
+}
+
+.capaJavascript {
+  background: #f0db4f;
+}
+
+.capaJavascript .capaAulaMarcaTexto {
+  font-size: 32px;
+  font-weight: 800;
+  color: #12161c;
+}
+
+.capaNode {
+  background: linear-gradient(135deg, #6d28d9 0%, #a21caf 100%);
+}
+
+.capaNode .capaAulaMarcaTexto {
+  font-size: 24px;
+  font-weight: 800;
+  font-style: italic;
+  color: #ffffff;
+}
+
+.cartaoAulaCorpo {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px;
+}
+
+.cartaoAulaTopo {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.cartaoAulaTitulo {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--ph-texto);
+  margin: 0;
+}
+
+.cartaoAulaMenu {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  margin: -4px -4px 0 0;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--ph-texto-secundario);
+  cursor: pointer;
+}
+
+.cartaoAulaMenu:hover {
+  background: #f4f5f7;
+  color: var(--ph-texto);
+}
+
+.cartaoAulaMenu:focus-visible {
+  outline: 2px solid var(--ph-accent);
+  outline-offset: 2px;
+}
+
+.cartaoAulaMenu svg {
+  width: 16px;
+  height: 16px;
+}
+
+.cartaoAulaDescricao {
+  font-size: 13px;
+  color: var(--ph-texto-secundario);
+  margin: 0;
+}
+
+.cartaoCriarAula {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 4px;
+  min-height: 100%;
+  padding: 24px 16px;
+  border-radius: var(--ph-raio);
+  border: 1.5px dashed var(--ph-border);
+  color: inherit;
+  text-decoration: none;
+  transition: border-color 0.15s, background-color 0.15s;
+}
+
+.cartaoCriarAula:hover {
+  border-color: var(--ph-accent);
+  background: rgba(20, 184, 166, 0.05);
+}
+
+.cartaoCriarAula:focus-visible {
+  outline: 2px solid var(--ph-accent);
+  outline-offset: 2px;
+}
+
+.cartaoCriarAulaIcone {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  margin-bottom: 10px;
+  color: var(--ph-texto-secundario);
+}
+
+.cartaoCriarAulaCirculo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.cartaoCriarAulaMais {
+  width: 18px;
+  height: 18px;
+}
+
+.cartaoCriarAulaTitulo {
+  font-size: 14.5px;
+  font-weight: 700;
+  color: var(--ph-texto);
+  margin: 0;
+}
+
+.cartaoCriarAulaTexto {
+  font-size: 12.5px;
+  color: var(--ph-texto-secundario);
+  margin: 0;
+}
+
+/* Skeletons */
+.esqueletoIndicador {
+  padding: 22px;
+  border-radius: var(--ph-raio);
+  border: 1px solid var(--ph-border);
+  background: var(--ph-card-bg);
+}
+
+.esqueletoSecao {
+  border-radius: var(--ph-raio);
+  border: 1px solid var(--ph-border);
+  background: var(--ph-card-bg);
+  animation: pulsar 1.4s ease-in-out infinite;
+}
+
+.esqueletoBloco {
+  border-radius: 6px;
+  background: #eeedf2;
+  animation: pulsar 1.4s ease-in-out infinite;
+}
+
+@keyframes pulsar {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@media (max-width: 1200px) {
+  .gradeIndicadores {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .gradeAulas {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 980px) {
+  .gradeSecoes {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .gradeIndicadores {
+    grid-template-columns: 1fr;
+  }
+
+  .gradeAulas {
+    grid-template-columns: 1fr;
+  }
+
+  .cartaoSecaoTopo {
+    flex-wrap: wrap;
+  }
+
+  .minhasAulasAcoes {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
