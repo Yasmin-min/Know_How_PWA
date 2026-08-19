@@ -1,0 +1,573 @@
+.pagina {
+  --cor-primaria: #4f2edc;
+  --cor-primaria-hover: #4324b8;
+  --cor-primaria-bg: #ede9fe;
+  --cor-borda: #e2e0ee;
+  --cor-texto: #1f1b2e;
+  --cor-texto-secundario: #6b6880;
+  --cor-erro: #d92d20;
+  --cor-destaque: #22d3ee;
+  --raio: 10px;
+  --espaco: 16px;
+
+  min-height: 100vh;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: #17151f;
+}
+
+.container {
+  display: flex;
+  width: 100%;
+  max-width: 1040px;
+  min-height: 620px;
+  box-sizing: border-box;
+  background: #ffffff;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 30px 60px -30px rgba(0, 0, 0, 0.5);
+}
+
+.painelEsquerdo {
+  position: relative;
+  flex: 0 0 40%;
+  overflow: hidden;
+  background: linear-gradient(160deg, #5339e6 0%, #3a22c4 100%);
+  color: #ffffff;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+}
+
+.decorCirculo1,
+.decorCirculo2 {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.06);
+  pointer-events: none;
+}
+
+.decorCirculo1 {
+  width: 320px;
+  height: 320px;
+  top: -120px;
+  right: -140px;
+}
+
+.decorCirculo2 {
+  width: 220px;
+  height: 220px;
+  bottom: -100px;
+  left: -80px;
+}
+
+.marca {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.marcaLogo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 9px;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.marcaLogo svg {
+  width: 18px;
+  height: 18px;
+}
+
+.marcaTexto {
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.marcaDestaque {
+  color: var(--cor-destaque);
+}
+
+.painelConteudo {
+  position: relative;
+  margin-top: auto;
+  margin-bottom: auto;
+  padding-top: 64px;
+}
+
+.painelTitulo {
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.25;
+  margin: 0 0 12px;
+}
+
+.painelTexto {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.75);
+  margin: 0 0 28px;
+}
+
+.listaBeneficios {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.listaBeneficios li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13.5px;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.iconBeneficio {
+  flex: 0 0 auto;
+  width: 18px;
+  height: 18px;
+  color: var(--cor-destaque);
+}
+
+.painelDireito {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+.formularioWrapper {
+  position: relative;
+  width: 100%;
+  max-width: 360px;
+}
+
+.indicador {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  margin-bottom: 28px;
+}
+
+.etapaGrupo {
+  display: flex;
+  align-items: flex-start;
+}
+
+.etapaItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  width: 70px;
+}
+
+.etapaCirculo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #ede9fe;
+  color: var(--cor-texto-secundario);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.etapaAtual {
+  background: var(--cor-primaria);
+  color: #ffffff;
+}
+
+.etapaConcluida {
+  background: var(--cor-primaria);
+  color: #ffffff;
+}
+
+.iconeCheck {
+  width: 14px;
+  height: 14px;
+}
+
+.etapaLabel {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-align: center;
+  color: var(--cor-texto-secundario);
+}
+
+.etapaLabelAtual {
+  color: var(--cor-texto);
+}
+
+.etapaLinha {
+  flex: 1;
+  align-self: center;
+  height: 2px;
+  margin-top: 15px;
+  background: var(--cor-borda);
+  min-width: 20px;
+}
+
+.etapaLinhaConcluida {
+  background: var(--cor-primaria);
+}
+
+.iconeEtapa {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  margin-bottom: 16px;
+  border-radius: 12px;
+  background: var(--cor-primaria-bg);
+  color: var(--cor-primaria);
+}
+
+.iconeEtapa svg {
+  width: 22px;
+  height: 22px;
+}
+
+.iconeSucesso {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: #ecfdf3;
+  color: #067647;
+}
+
+.iconeSucesso svg {
+  width: 32px;
+  height: 32px;
+}
+
+.conteudoConcluido {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.conteudoConcluido .botaoPrimario {
+  width: 100%;
+  margin-top: 8px;
+}
+
+.tituloForm {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--cor-texto);
+  margin: 0 0 6px;
+}
+
+.subtituloForm {
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: var(--cor-texto-secundario);
+  margin: 0 0 24px;
+}
+
+.formulario {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espaco);
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--cor-texto);
+}
+
+.obrigatorio {
+  color: var(--cor-erro);
+}
+
+.inputWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input {
+  width: 100%;
+  box-sizing: border-box;
+  height: 44px;
+  padding: 0 14px;
+  border-radius: var(--raio);
+  border: 1px solid var(--cor-borda);
+  font-size: 14px;
+  color: var(--cor-texto);
+  background: #ffffff;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.inputWrapper .input {
+  padding-right: 42px;
+}
+
+.input::placeholder {
+  color: #a8a5bb;
+}
+
+.input:hover {
+  border-color: #c9c5e0;
+}
+
+.input:focus-visible {
+  outline: none;
+  border-color: var(--cor-primaria);
+  box-shadow: 0 0 0 3px rgba(79, 46, 220, 0.15);
+}
+
+.input[aria-invalid="true"] {
+  border-color: var(--cor-erro);
+}
+
+.inputCodigo {
+  text-align: center;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0.5em;
+  padding-left: 8px;
+}
+
+.inputCodigo::placeholder {
+  letter-spacing: 0.5em;
+}
+
+.botaoOlho {
+  position: absolute;
+  right: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border: none;
+  background: transparent;
+  color: var(--cor-texto-secundario);
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+.botaoOlho:hover {
+  color: var(--cor-texto);
+  background: #f5f3ff;
+}
+
+.botaoOlho:focus-visible {
+  outline: 2px solid var(--cor-primaria);
+  outline-offset: 2px;
+}
+
+.botaoOlho svg {
+  width: 17px;
+  height: 17px;
+}
+
+.erroCampo {
+  font-size: 12px;
+  color: var(--cor-erro);
+}
+
+.textoDica {
+  font-size: 12px;
+  color: var(--cor-texto-secundario);
+}
+
+.erroApi {
+  font-size: 13px;
+  color: var(--cor-erro);
+  background: #fef3f2;
+  border: 1px solid #fecdca;
+  border-radius: var(--raio);
+  padding: 10px 12px;
+}
+
+.botaoPrimario {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 44px;
+  border: none;
+  border-radius: var(--raio);
+  background: var(--cor-primaria);
+  color: #ffffff;
+  font-size: 14.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.15s, opacity 0.15s;
+}
+
+.botaoPrimario:hover:not(:disabled) {
+  background: var(--cor-primaria-hover);
+}
+
+.botaoPrimario:focus-visible {
+  outline: 2px solid var(--cor-primaria);
+  outline-offset: 2px;
+}
+
+.botaoPrimario:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.botaoPrimario:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.spinner {
+  width: 16px;
+  height: 16px;
+  animation: girar 0.8s linear infinite;
+}
+
+@keyframes girar {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.botaoVoltar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  margin-bottom: 4px;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--cor-texto-secundario);
+  cursor: pointer;
+  transition: background-color 0.15s, color 0.15s;
+}
+
+.botaoVoltar:hover {
+  background: var(--cor-primaria-bg);
+  color: var(--cor-texto);
+}
+
+.botaoVoltar:focus-visible {
+  outline: 2px solid var(--cor-primaria);
+  outline-offset: 2px;
+}
+
+.botaoVoltar svg {
+  width: 18px;
+  height: 18px;
+}
+
+.textoReenvio {
+  margin: 18px 0 0;
+  font-size: 13px;
+  text-align: center;
+  color: var(--cor-texto-secundario);
+}
+
+.botaoReenviar {
+  border: none;
+  background: transparent;
+  padding: 0;
+  font: inherit;
+  font-weight: 600;
+  color: var(--cor-primaria);
+  cursor: pointer;
+}
+
+.botaoReenviar:hover:not(:disabled) {
+  text-decoration: underline;
+}
+
+.botaoReenviar:disabled {
+  color: var(--cor-texto-secundario);
+  cursor: not-allowed;
+}
+
+.botaoReenviar:focus-visible {
+  outline: 2px solid var(--cor-primaria);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.linkVoltarLogin {
+  display: block;
+  margin-top: 20px;
+  font-size: 12.5px;
+  text-align: center;
+  color: var(--cor-primaria);
+  text-decoration: none;
+}
+
+.linkVoltarLogin:hover {
+  text-decoration: underline;
+}
+
+.linkVoltarLogin:focus-visible {
+  outline: 2px solid var(--cor-primaria);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+@media (max-width: 860px) {
+  .painelEsquerdo {
+    display: none;
+  }
+
+  .container {
+    max-width: 460px;
+    min-height: 0;
+  }
+
+  .painelDireito {
+    padding: 32px 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .pagina {
+    padding: 0;
+  }
+
+  .container {
+    border-radius: 0;
+    box-shadow: none;
+    min-height: 100vh;
+  }
+
+  .etapaItem {
+    width: 56px;
+  }
+
+  .inputCodigo {
+    letter-spacing: 0.35em;
+  }
+}

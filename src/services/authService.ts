@@ -1,5 +1,16 @@
 import Api from "../config/api";
-import type { LoginRequest, LoginResponse, RegistroRequest, UsuarioDTO } from "../types/auth";
+import type {
+  LoginRequest,
+  LoginResponse,
+  RegistroRequest,
+  UsuarioDTO,
+  SolicitarRecuperacaoSenhaRequest,
+  SolicitarRecuperacaoSenhaResponse,
+  ConfirmarCodigoRecuperacaoRequest,
+  ConfirmarCodigoRecuperacaoResponse,
+  RedefinirSenhaRequest,
+  RedefinirSenhaResponse,
+} from "../types/auth";
 
 const TOKEN_KEY = "knowhow:token";
 const USER_KEY = "knowhow:user";
@@ -32,5 +43,31 @@ export async function login(data: LoginRequest): Promise<LoginResponse> {
 
 export async function registrar(data: RegistroRequest): Promise<UsuarioDTO> {
   const response = await Api.post<UsuarioDTO>("/User/registrar", data);
+  return response.data;
+}
+
+export async function solicitarRecuperacaoSenha(
+  data: SolicitarRecuperacaoSenhaRequest,
+): Promise<SolicitarRecuperacaoSenhaResponse> {
+  const response = await Api.post<SolicitarRecuperacaoSenhaResponse>("/User/recuperar-senha/solicitar", data);
+  return response.data;
+}
+
+export async function reenviarCodigoRecuperacao(
+  data: SolicitarRecuperacaoSenhaRequest,
+): Promise<SolicitarRecuperacaoSenhaResponse> {
+  const response = await Api.post<SolicitarRecuperacaoSenhaResponse>("/User/recuperar-senha/reenviar", data);
+  return response.data;
+}
+
+export async function confirmarCodigoRecuperacao(
+  data: ConfirmarCodigoRecuperacaoRequest,
+): Promise<ConfirmarCodigoRecuperacaoResponse> {
+  const response = await Api.post<ConfirmarCodigoRecuperacaoResponse>("/User/recuperar-senha/confirmar", data);
+  return response.data;
+}
+
+export async function redefinirSenha(data: RedefinirSenhaRequest): Promise<RedefinirSenhaResponse> {
+  const response = await Api.post<RedefinirSenhaResponse>("/User/recuperar-senha/redefinir", data);
   return response.data;
 }

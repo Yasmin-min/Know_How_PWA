@@ -39,3 +39,30 @@ export interface EditarUsuarioRequest {
   usuarioId: number;
   userEditado: UsuarioDTO;
 }
+
+export interface SolicitarRecuperacaoSenhaRequest {
+  email: string;
+}
+
+export interface SolicitarRecuperacaoSenhaResponse {
+  mensagem: string;
+}
+
+export interface ConfirmarCodigoRecuperacaoRequest {
+  email: string;
+  codigo: string;
+}
+
+export interface ConfirmarCodigoRecuperacaoResponse {
+  tokenRedefinicao: string;
+}
+
+export interface RedefinirSenhaRequest {
+  email: string;
+  tokenRedefinicao: string;
+  novaSenha: string;
+}
+
+export interface RedefinirSenhaResponse {
+  mensagem: string;
+}
