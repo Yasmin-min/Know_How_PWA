@@ -11,6 +11,7 @@ import CadastroProfessor from "./pages/CadastroProfessor";
 import Professores from "./pages/Professores";
 import ProfessorDashboard from "./pages/ProfessorDashboard";
 import ProfessorNovaAula from "./pages/ProfessorNovaAula";
+import ProfessorConfiguracoes from "./pages/ProfessorConfiguracoes";
 import ProfessorEmBreve from "./pages/ProfessorEmBreve";
 import rotas from "./config/rotas";
 import { TipoUsuario } from "./types/auth";
@@ -43,7 +44,7 @@ function App() {
             <Route element={<ProfessorEmBreve />} path={rotas.professorMensagens} />
             <Route element={<ProfessorEmBreve />} path={rotas.professorPlanos} />
             <Route element={<ProfessorEmBreve />} path={rotas.professorAvaliacoes} />
-            <Route element={<ProfessorEmBreve />} path={rotas.professorConfiguracoes} />
+            <Route element={<ProfessorConfiguracoes />} path={rotas.professorConfiguracoes} />
             <Route element={<ProfessorEmBreve />} path={rotas.professorPerfil} />
           </Route>
         </Route>
