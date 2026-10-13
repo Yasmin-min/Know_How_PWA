@@ -99,12 +99,17 @@
   background: #e0455f;
 }
 
+.usuarioContainer {
+  position: relative;
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
 .usuario {
   display: flex;
   align-items: center;
   gap: 8px;
   flex-shrink: 0;
-  margin-left: auto;
   border: none;
   background: transparent;
   padding: 4px 6px 4px 4px;
@@ -150,6 +155,56 @@
   width: 16px;
   height: 16px;
   color: var(--cor-texto-secundario);
+  flex-shrink: 0;
+}
+
+.usuarioMenu {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  min-width: 160px;
+  padding: 6px;
+  background: #ffffff;
+  border: 1px solid var(--cor-borda);
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(31, 27, 46, 0.12);
+  z-index: 20;
+}
+
+.usuarioMenuItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  height: 38px;
+  padding: 0 10px;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--cor-texto);
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.15s;
+  box-sizing: border-box;
+}
+
+.usuarioMenuItem:hover {
+  background: #f4f3f6;
+}
+
+.usuarioMenuItemPerigo {
+  color: #e0455f;
+}
+
+.usuarioMenuItemPerigo:hover {
+  background: #fdeef0;
+}
+
+.usuarioMenuIcone {
+  width: 18px;
+  height: 18px;
   flex-shrink: 0;
 }
 
