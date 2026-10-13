@@ -45,10 +45,10 @@ function Header() {
           <IconCapelo className={styles.navIcone} />
           Professores
         </Link>
-        <button type="button" className={styles.navItem}>
+        <Link to={rotas.conversas} className={styles.navItem}>
           <IconChat className={styles.navIcone} />
           Conversas
-        </button>
+        </Link>
         <button type="button" className={styles.navItem}>
           <IconCalendario className={styles.navIcone} />
           Aulas

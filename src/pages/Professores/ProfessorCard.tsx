@@ -1,6 +1,8 @@
+import { useNavigate } from "react-router-dom";
 import AvatarProfessor from "./AvatarProfessor";
 import { IconEstrela } from "./icons";
 import { IconChat } from "../../base/BaseGeral/icons";
+import rotas from "../../config/rotas";
 import type { Professor } from "../../types/professor";
 import styles from "./styles.module.css";
 
@@ -9,6 +11,14 @@ interface ProfessorCardProps {
 }
 
 function ProfessorCard({ professor }: ProfessorCardProps) {
+  const navigate = useNavigate();
+
+  function aoConversar() {
+    navigate(rotas.conversas, {
+      state: { professorId: Number(professor.id), professorNome: professor.nome },
+    });
+  }
+
   return (
     <article className={styles.card}>
       <div className={styles.cardTopo}>
@@ -43,7 +53,7 @@ function ProfessorCard({ professor }: ProfessorCardProps) {
           <button type="button" className={styles.botaoVerPerfil}>
             Ver perfil
           </button>
-          <button type="button" className={styles.botaoConversar}>
+          <button type="button" className={styles.botaoConversar} onClick={aoConversar}>
             <IconChat className={styles.botaoConversarIcone} />
             Conversar
           </button>

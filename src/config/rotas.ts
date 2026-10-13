@@ -8,6 +8,7 @@ const rotas = {
   termos: "/termos",
   privacidade: "/privacidade",
   professores: "/professores",
+  conversas: "/conversas",
   configuracoes: "/configuracoes",
   professorPainel: "/professor",
   professorAulas: "/professor/aulas",

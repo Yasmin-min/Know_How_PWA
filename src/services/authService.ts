@@ -1,4 +1,5 @@
 import Api from "../config/api";
+import { desconectar as desconectarChat } from "./chatHub";
 import type {
   LoginRequest,
   LoginResponse,
@@ -33,6 +34,7 @@ function salvarSessao(dados: LoginResponse): void {
 export function logout(): void {
   localStorage.removeItem(TOKEN_KEY);
   localStorage.removeItem(USER_KEY);
+  void desconectarChat();
 }
 
 export async function login(data: LoginRequest): Promise<LoginResponse> {

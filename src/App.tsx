@@ -10,9 +10,11 @@ import CadastroAluno from "./pages/CadastroAluno";
 import CadastroProfessor from "./pages/CadastroProfessor";
 import Professores from "./pages/Professores";
 import AlunoConfiguracoes from "./pages/AlunoConfiguracoes";
+import AlunoConversas from "./pages/AlunoConversas";
 import ProfessorDashboard from "./pages/ProfessorDashboard";
 import ProfessorNovaAula from "./pages/ProfessorNovaAula";
 import ProfessorConfiguracoes from "./pages/ProfessorConfiguracoes";
+import ProfessorMensagens from "./pages/ProfessorMensagens";
 import ProfessorEmBreve from "./pages/ProfessorEmBreve";
 import rotas from "./config/rotas";
 import { TipoUsuario } from "./types/auth";
@@ -32,6 +34,7 @@ function App() {
         <Route element={<BaseGeral />}>
           <Route element={<RotaProtegida tiposPermitidos={[TipoUsuario.Aluno]} />}>
             <Route element={<Professores />} path={rotas.professores} />
+            <Route element={<AlunoConversas />} path={rotas.conversas} />
             <Route element={<AlunoConfiguracoes />} path={rotas.configuracoes} />
           </Route>
         </Route>
@@ -43,7 +46,7 @@ function App() {
             <Route element={<ProfessorNovaAula />} path={rotas.professorAulaNova} />
             <Route element={<ProfessorEmBreve />} path={rotas.professorAlunos} />
             <Route element={<ProfessorEmBreve />} path={rotas.professorAgenda} />
-            <Route element={<ProfessorEmBreve />} path={rotas.professorMensagens} />
+            <Route element={<ProfessorMensagens />} path={rotas.professorMensagens} />
             <Route element={<ProfessorEmBreve />} path={rotas.professorPlanos} />
             <Route element={<ProfessorEmBreve />} path={rotas.professorAvaliacoes} />
             <Route element={<ProfessorConfiguracoes />} path={rotas.professorConfiguracoes} />
