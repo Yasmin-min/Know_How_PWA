@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { IconCapelo } from "../../pages/Login/icons";
 import { IconUsuario } from "../../pages/Cadastro/icons";
 import { IconChat, IconCalendario, IconSino, IconChevronBaixo, IconSair } from "./icons";
+import { IconConfiguracoes } from "../BaseProfessor/icons";
 import { getUsuario, logout } from "../../services/authService";
 import rotas from "../../config/rotas";
 import styles from "./styles.module.css";
@@ -76,6 +77,15 @@ function Header() {
 
         {menuAberto ? (
           <div className={styles.usuarioMenu} role="menu">
+            <Link
+              to={rotas.configuracoes}
+              className={styles.usuarioMenuItem}
+              role="menuitem"
+              onClick={() => setMenuAberto(false)}
+            >
+              <IconConfiguracoes className={styles.usuarioMenuIcone} />
+              Configurações
+            </Link>
             <button
               type="button"
               className={`${styles.usuarioMenuItem} ${styles.usuarioMenuItemPerigo}`}

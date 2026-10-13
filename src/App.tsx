@@ -9,6 +9,7 @@ import Cadastro from "./pages/Cadastro";
 import CadastroAluno from "./pages/CadastroAluno";
 import CadastroProfessor from "./pages/CadastroProfessor";
 import Professores from "./pages/Professores";
+import AlunoConfiguracoes from "./pages/AlunoConfiguracoes";
 import ProfessorDashboard from "./pages/ProfessorDashboard";
 import ProfessorNovaAula from "./pages/ProfessorNovaAula";
 import ProfessorConfiguracoes from "./pages/ProfessorConfiguracoes";
@@ -31,6 +32,7 @@ function App() {
         <Route element={<BaseGeral />}>
           <Route element={<RotaProtegida tiposPermitidos={[TipoUsuario.Aluno]} />}>
             <Route element={<Professores />} path={rotas.professores} />
+            <Route element={<AlunoConfiguracoes />} path={rotas.configuracoes} />
           </Route>
         </Route>
 
