@@ -16,6 +16,8 @@ export interface MensagensLidasPayload {
 
 let connection: signalR.HubConnection | null = null;
 let startPromise: Promise<void> | null = null;
+// O HubConnection não permite remover callbacks de onreconnected; repassamos por este conjunto.
+const aoReconectarCallbacks = new Set<() => void>();
 
 function obterConexao(): signalR.HubConnection {
   if (!connection) {
@@ -25,6 +27,7 @@ function obterConexao(): signalR.HubConnection {
       })
       .withAutomaticReconnect()
       .build();
+    connection.onreconnected(() => aoReconectarCallbacks.forEach((callback) => callback()));
   }
   return connection;
 }
@@ -68,4 +71,61 @@ export function aoReceberMensagensLidas(callback: (payload: MensagensLidasPayloa
   const conexao = obterConexao();
   conexao.on("MensagensLidas", callback);
   return () => conexao.off("MensagensLidas", callback);
+}
+
+// Chamadas de vídeo: sinalização WebRTC pelo mesmo hub do chat.
+
+export interface EventosChamada {
+  onSinal: (remetenteId: number, sinal: string) => void;
+  onParticipanteEntrou: (usuarioId: number) => void;
+  onParticipanteSaiu: (usuarioId: number) => void;
+  onAbertaEmOutroDispositivo: () => void;
+}
+
+export function aoReceberEventosChamada(aulaId: string, eventos: EventosChamada): () => void {
+  const conexao = obterConexao();
+  const sinal = (id: string, remetenteId: number, texto: string) => {
+    if (id === aulaId) eventos.onSinal(remetenteId, texto);
+  };
+  const entrou = (id: string, usuarioId: number) => {
+    if (id === aulaId) eventos.onParticipanteEntrou(usuarioId);
+  };
+  const saiu = (id: string, usuarioId: number) => {
+    if (id === aulaId) eventos.onParticipanteSaiu(usuarioId);
+  };
+  const outroDispositivo = (id: string) => {
+    if (id === aulaId) eventos.onAbertaEmOutroDispositivo();
+  };
+  conexao.on("ChamadaSinal", sinal);
+  conexao.on("ChamadaParticipanteEntrou", entrou);
+  conexao.on("ChamadaParticipanteSaiu", saiu);
+  conexao.on("ChamadaAbertaEmOutroDispositivo", outroDispositivo);
+  return () => {
+    conexao.off("ChamadaSinal", sinal);
+    conexao.off("ChamadaParticipanteEntrou", entrou);
+    conexao.off("ChamadaParticipanteSaiu", saiu);
+    conexao.off("ChamadaAbertaEmOutroDispositivo", outroDispositivo);
+  };
+}
+
+// Depois de uma queda, a conexão volta com outro id e fora dos grupos: quem estava numa
+// chamada precisa entrar de novo.
+export function aoReconectar(callback: () => void): () => void {
+  aoReconectarCallbacks.add(callback);
+  return () => aoReconectarCallbacks.delete(callback);
+}
+
+export async function entrarNaChamada(aulaId: string): Promise<{ outroPresente: boolean }> {
+  const conexao = await conectar();
+  return conexao.invoke<{ outroPresente: boolean }>("EntrarNaChamada", aulaId);
+}
+
+export async function sairDaChamada(aulaId: string): Promise<void> {
+  if (!estaConectado() || !connection) return;
+  await connection.invoke("SairDaChamada", aulaId);
+}
+
+export async function enviarSinalChamada(aulaId: string, sinal: string): Promise<void> {
+  const conexao = await conectar();
+  await conexao.invoke("EnviarSinalChamada", aulaId, sinal);
 }
