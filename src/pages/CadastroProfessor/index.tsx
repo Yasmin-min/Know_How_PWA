@@ -504,8 +504,8 @@ function CadastroProfessor() {
                   aria-describedby={campoTocado("aceiteTermos") ? "aceiteTermos-erro" : undefined}
                 />
                 <label className={styles.labelTermos} htmlFor="aceiteTermos">
-                  Concordo com os <Link to={rotas.termos}>Termos de Uso</Link> e a{" "}
-                  <Link to={rotas.privacidade}>Política de Privacidade</Link>
+                  Concordo com os <Link to={rotas.termos} target="_blank">Termos de Uso</Link> e a{" "}
+                  <Link to={rotas.privacidade} target="_blank">Política de Privacidade</Link>
                 </label>
               </div>
               {campoTocado("aceiteTermos") ? (
