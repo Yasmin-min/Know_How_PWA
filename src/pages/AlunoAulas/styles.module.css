@@ -1,0 +1,344 @@
+.pagina {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 32px 24px 64px;
+  box-sizing: border-box;
+}
+
+.titulo {
+  margin: 0 0 4px;
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--cor-texto);
+}
+
+.subtitulo {
+  margin: 0;
+  font-size: 14.5px;
+  color: var(--cor-texto-secundario);
+}
+
+.abas {
+  display: flex;
+  gap: 4px;
+  border-bottom: 1px solid var(--cor-borda);
+}
+
+.aba {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 42px;
+  padding: 0 14px;
+  margin-bottom: -1px;
+  border: none;
+  border-bottom: 2px solid transparent;
+  background: transparent;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--cor-texto-secundario);
+  cursor: pointer;
+}
+
+.aba:hover {
+  color: var(--cor-texto);
+}
+
+.aba:focus-visible {
+  outline: 2px solid var(--cor-primaria);
+  outline-offset: -2px;
+}
+
+.abaAtiva,
+.abaAtiva:hover {
+  border-bottom-color: var(--cor-primaria);
+  color: var(--cor-primaria);
+}
+
+.abaContador {
+  min-width: 20px;
+  padding: 1px 6px;
+  box-sizing: border-box;
+  border-radius: 999px;
+  background: var(--cor-primaria-bg);
+  font-size: 11.5px;
+  text-align: center;
+}
+
+.lista {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.aula {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 18px 20px;
+  border-radius: 14px;
+  border: 1px solid var(--cor-borda);
+  background: #ffffff;
+}
+
+.aulaCancelada {
+  background: #fafafa;
+}
+
+.aulaCancelada .aulaTitulo,
+.aulaCancelada .quando {
+  color: var(--cor-texto-secundario);
+}
+
+.aulaCancelada .aulaTitulo {
+  text-decoration: line-through;
+}
+
+.data {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 54px;
+  height: 58px;
+  border-radius: 12px;
+  background: var(--cor-primaria-bg);
+  color: var(--cor-primaria);
+}
+
+.dataMes {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.dataDia {
+  font-size: 22px;
+  font-weight: 800;
+  line-height: 1.1;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.infoTopo {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.aulaTitulo {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--cor-texto);
+  overflow-wrap: anywhere;
+}
+
+.selo {
+  padding: 2px 9px;
+  border-radius: 999px;
+  font-size: 11.5px;
+  font-weight: 700;
+}
+
+.seloHoje {
+  background: var(--cor-primaria-bg);
+  color: var(--cor-primaria);
+}
+
+.seloAgora {
+  background: #dcfae6;
+  color: #067647;
+}
+
+.seloCancelada {
+  background: #fee4e2;
+  color: #b42318;
+}
+
+.quando,
+.professor,
+.descricao {
+  margin: 0;
+  font-size: 13.5px;
+  color: var(--cor-texto-secundario);
+}
+
+.professor a {
+  font-weight: 600;
+  color: var(--cor-primaria);
+}
+
+.descricao {
+  margin-top: 4px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.acoes {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.botaoPrimario,
+.botaoSecundario {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 38px;
+  padding: 0 14px;
+  box-sizing: border-box;
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 13.5px;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.botaoPrimario {
+  border: none;
+  background: var(--cor-primaria);
+  color: #ffffff;
+}
+
+.botaoSecundario {
+  border: 1.5px solid var(--cor-borda);
+  background: #ffffff;
+  color: var(--cor-texto);
+}
+
+.botaoSecundario:hover {
+  border-color: var(--cor-primaria);
+  color: var(--cor-primaria);
+}
+
+.botaoPrimario:focus-visible,
+.botaoSecundario:focus-visible,
+.botaoLink:focus-visible {
+  outline: 2px solid var(--cor-primaria);
+  outline-offset: 2px;
+}
+
+.botaoIcone {
+  width: 16px;
+  height: 16px;
+}
+
+.iconeEstrela {
+  color: #f5a623;
+}
+
+.botaoLink {
+  padding: 0;
+  border: none;
+  background: transparent;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--cor-primaria);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.estado {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 48px 16px;
+  border-radius: 14px;
+  border: 1px solid var(--cor-borda);
+  background: #ffffff;
+  font-size: 14px;
+  color: var(--cor-texto-secundario);
+}
+
+.spinner {
+  width: 16px;
+  height: 16px;
+  animation: girar 0.8s linear infinite;
+}
+
+@keyframes girar {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.vazio {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 48px 24px;
+  border-radius: 14px;
+  border: 1px dashed var(--cor-borda);
+  background: #ffffff;
+  text-align: center;
+}
+
+.vazioIcone {
+  width: 32px;
+  height: 32px;
+  margin-bottom: 4px;
+  color: var(--cor-primaria);
+}
+
+.vazioTitulo {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--cor-texto);
+}
+
+.vazioTexto {
+  max-width: 420px;
+  margin: 0 0 8px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--cor-texto-secundario);
+}
+
+@media (max-width: 640px) {
+  .pagina {
+    padding: 24px 16px 48px;
+  }
+
+  .aula {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  .acoes {
+    grid-column: 1 / -1;
+    flex-direction: row;
+  }
+
+  .acoes > * {
+    flex: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spinner {
+    animation: none;
+  }
+}
