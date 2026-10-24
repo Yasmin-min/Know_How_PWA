@@ -1,5 +1,7 @@
 import Api from "../config/api";
+import { TOKEN_KEY, USER_KEY } from "../config/chavesSessao";
 import { desconectar as desconectarChat } from "./chatHub";
+import { limparFotos } from "../features/Foto/fotoCache";
 import type {
   LoginRequest,
   LoginResponse,
@@ -12,9 +14,6 @@ import type {
   RedefinirSenhaRequest,
   RedefinirSenhaResponse,
 } from "../types/auth";
-
-const TOKEN_KEY = "knowhow:token";
-const USER_KEY = "knowhow:user";
 
 export function getToken(): string | null {
   return localStorage.getItem(TOKEN_KEY);
@@ -35,6 +34,7 @@ export function logout(): void {
   localStorage.removeItem(TOKEN_KEY);
   localStorage.removeItem(USER_KEY);
   void desconectarChat();
+  limparFotos();
 }
 
 export async function login(data: LoginRequest): Promise<LoginResponse> {
@@ -67,6 +67,10 @@ export async function confirmarCodigoRecuperacao(
 ): Promise<ConfirmarCodigoRecuperacaoResponse> {
   const response = await Api.post<ConfirmarCodigoRecuperacaoResponse>("/User/recuperar-senha/confirmar", data);
   return response.data;
+}
+
+export async function alterarSenha(senhaAtual: string, novaSenha: string): Promise<void> {
+  await Api.put("/User/senha", { senhaAtual, novaSenha });
 }
 
 export async function redefinirSenha(data: RedefinirSenhaRequest): Promise<RedefinirSenhaResponse> {

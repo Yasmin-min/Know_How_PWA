@@ -4,6 +4,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { isAxiosError } from "axios";
 import rotas from "../../config/rotas";
 import { login } from "../../services/authService";
+import { caminhoSeguro } from "../../services/redirecionamento";
 import { TipoUsuario } from "../../types/auth";
 import {
   IconLogoMarca,
@@ -68,6 +69,9 @@ function Login() {
   const navigate = useNavigate();
   const location = useLocation();
   const mensagemSucesso = (location.state as { mensagem?: string } | null)?.mensagem ?? null;
+  const parametros = new URLSearchParams(location.search);
+  const sessaoExpirou = parametros.get("expirou") === "1";
+  const voltarPara = caminhoSeguro(parametros.get("de"));
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -97,7 +101,9 @@ function Login() {
     setCarregando(true);
     try {
       const resposta = await login({ email, senha: password });
-      navigate(resposta.tipoUsuario === TipoUsuario.Aluno ? rotas.professores : rotas.professorPainel);
+      navigate(voltarPara ?? (resposta.tipoUsuario === TipoUsuario.Aluno ? rotas.professores : rotas.professorPainel), {
+        replace: true,
+      });
     } catch (erro) {
       setErroApi(mensagemErroApi(erro));
     } finally {
@@ -150,6 +156,12 @@ function Login() {
           <div className={styles.formularioWrapper}>
             <h2 className={styles.tituloForm}>Entrar na conta</h2>
             <p className={styles.subtituloForm}>Bem-vindo de volta!</p>
+
+            {sessaoExpirou ? (
+              <div className={styles.sucessoApi} role="status">
+                Sua sessão expirou. Entre novamente para continuar.
+              </div>
+            ) : null}
 
             {mensagemSucesso ? (
               <div className={styles.sucessoApi} role="status">
