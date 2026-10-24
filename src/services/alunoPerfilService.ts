@@ -1,40 +1,24 @@
-import { getUsuario } from "./authService";
+import Api from "../config/api";
 import type { AtualizarPerfilAlunoRequest, PerfilAlunoDTO } from "../types/alunoPerfil";
 
-const ATRASO_MOCK_MS = 500;
+// A API devolve a data com hora e a área ainda não escolhida como null.
+type PerfilAlunoApi = Omit<PerfilAlunoDTO, "areaInteresse"> & { areaInteresse: string | null };
 
-function chaveMock(alunoId: number): string {
-  return `knowhow:aluno-perfil-mock:${alunoId}`;
+function normalizar(perfil: PerfilAlunoApi): PerfilAlunoDTO {
+  return {
+    ...perfil,
+    dataNascimento: perfil.dataNascimento ? perfil.dataNascimento.slice(0, 10) : "",
+    areaInteresse: perfil.areaInteresse ?? "",
+    fotoPerfilBase64: perfil.fotoPerfilBase64 ?? null,
+  };
 }
 
-// Mock: endpoints de perfil do aluno ainda não existem na API.
-// Quando existirem, trocar os corpos por:
-//   GET /Aluno/perfil -> Api.get<PerfilAlunoDTO>("/Aluno/perfil")
-//   PUT /Aluno/perfil -> Api.put<PerfilAlunoDTO>("/Aluno/perfil", dados)
 export async function getPerfilAluno(): Promise<PerfilAlunoDTO> {
-  const usuario = getUsuario();
-  const bruto = usuario ? localStorage.getItem(chaveMock(usuario.id)) : null;
-  const salvo: Partial<PerfilAlunoDTO> = bruto ? JSON.parse(bruto) : {};
-
-  const perfil: PerfilAlunoDTO = {
-    id: usuario?.id ?? 0,
-    nome: usuario?.nome ?? "",
-    email: usuario?.email ?? "",
-    dataNascimento: "",
-    areaInteresse: "",
-    fotoPerfilBase64: null,
-    ...salvo,
-  };
-
-  return new Promise((resolve) => setTimeout(() => resolve(perfil), ATRASO_MOCK_MS));
+  const response = await Api.get<PerfilAlunoApi>("/Aluno/perfil");
+  return normalizar(response.data);
 }
 
 export async function atualizarPerfilAluno(dados: AtualizarPerfilAlunoRequest): Promise<PerfilAlunoDTO> {
-  const usuario = getUsuario();
-  const alunoId = usuario?.id ?? 0;
-  const perfilAtualizado: PerfilAlunoDTO = { id: alunoId, ...dados, fotoPerfilBase64: dados.fotoPerfilBase64 ?? null };
-
-  localStorage.setItem(chaveMock(alunoId), JSON.stringify(perfilAtualizado));
-
-  return new Promise((resolve) => setTimeout(() => resolve(perfilAtualizado), ATRASO_MOCK_MS));
+  const response = await Api.put<PerfilAlunoApi>("/Aluno/perfil", dados);
+  return normalizar(response.data);
 }

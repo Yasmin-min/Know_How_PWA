@@ -10,6 +10,9 @@ import { getPerfilAluno, atualizarPerfilAluno } from "../../services/alunoPerfil
 import { TAMANHO_MAXIMO_FOTO_BYTES, TIPOS_FOTO_ACEITOS } from "./types";
 import type { DadosConfiguracoesAluno, ErrosConfiguracoesAluno } from "./types";
 import { construirPayload, interpretarErroApi, validarDados } from "./validacao";
+import FormularioSenha from "../../features/Conta/FormularioSenha";
+import { invalidarFoto } from "../../features/Foto/fotoCache";
+import { getUsuario } from "../../services/authService";
 import styles from "./styles.module.css";
 
 interface CamposTocados {
@@ -130,6 +133,10 @@ function AlunoConfiguracoes() {
     setSalvando(true);
     try {
       await atualizarPerfilAluno(construirPayload(dados, fotoBase64));
+      if (fotoBase64) {
+        const usuarioAtual = getUsuario();
+        if (usuarioAtual) invalidarFoto(usuarioAtual.id);
+      }
       setMensagemSucesso("Dados atualizados com sucesso!");
     } catch (erro) {
       const { geral, campos } = interpretarErroApi(erro);
@@ -335,6 +342,8 @@ function AlunoConfiguracoes() {
           </div>
         </div>
       </form>
+
+      <FormularioSenha />
     </div>
   );
 }

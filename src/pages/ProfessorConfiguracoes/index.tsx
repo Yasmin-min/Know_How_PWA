@@ -12,6 +12,9 @@ import { getPerfilProfessor, atualizarPerfilProfessor } from "../../services/pro
 import { TAMANHO_MAXIMO_FOTO_BYTES, TIPOS_FOTO_ACEITOS } from "./types";
 import type { DadosConfiguracoesProfessor, ErrosConfiguracoesProfessor } from "./types";
 import { construirPayload, formatarValorMonetario, interpretarErroApi, validarDados } from "./validacao";
+import FormularioSenha from "../../features/Conta/FormularioSenha";
+import { invalidarFoto } from "../../features/Foto/fotoCache";
+import { getUsuario } from "../../services/authService";
 import styles from "./styles.module.css";
 
 interface CamposTocados {
@@ -160,6 +163,10 @@ function ProfessorConfiguracoes() {
     setSalvando(true);
     try {
       await atualizarPerfilProfessor(construirPayload(dados, fotoBase64));
+      if (fotoBase64) {
+        const usuarioAtual = getUsuario();
+        if (usuarioAtual) invalidarFoto(usuarioAtual.id);
+      }
       setMensagemSucesso("Dados atualizados com sucesso!");
     } catch (erro) {
       const { geral, campos } = interpretarErroApi(erro);
@@ -492,6 +499,8 @@ function ProfessorConfiguracoes() {
           </div>
         </div>
       </form>
+
+      <FormularioSenha />
     </div>
   );
 }
