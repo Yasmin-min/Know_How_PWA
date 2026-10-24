@@ -13,6 +13,9 @@ import {
 } from "./icons";
 import styles from "./styles.module.css";
 
+// E-mail de contato mostrado no rodapé; sem ele configurado, o link não aparece.
+const EMAIL_CONTATO = (import.meta.env.VITE_EMAIL_CONTATO as string | undefined)?.trim();
+
 const CONCEITO_CARDS = [
   {
     icone: IconVideoCamera,
@@ -123,7 +126,7 @@ function Inicio() {
           </div>
         </div>
 
-        <div className={styles.heroIlustracao}>
+        <div className={styles.heroIlustracao} aria-hidden="true">
           <div className={styles.callMock}>
             <div className={styles.callAvatarPrincipal}>
               <IconCapelo className={styles.callAvatarIcone} />
@@ -155,6 +158,7 @@ function Inicio() {
               </span>
             </div>
           </div>
+          <span className={styles.callLegenda}>Ilustração de uma aula</span>
         </div>
       </section>
 
@@ -291,6 +295,9 @@ function Inicio() {
           <Link to={rotas.login}>Entrar</Link>
           <Link to={rotas.cadastroAluno}>Sou Aluno</Link>
           <Link to={rotas.cadastroProfessor}>Sou Professor</Link>
+          <Link to={rotas.termos}>Termos de Uso</Link>
+          <Link to={rotas.privacidade}>Privacidade</Link>
+          {EMAIL_CONTATO ? <a href={`mailto:${EMAIL_CONTATO}`}>Contato</a> : null}
         </nav>
 
         <div className={styles.rodapeCopyright}>
