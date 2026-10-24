@@ -65,7 +65,8 @@ function Professores() {
         (professor) =>
           professor.nome.toLowerCase().includes(termoNormalizado) ||
           professor.materia.toLowerCase().includes(termoNormalizado) ||
-          professor.descricao.toLowerCase().includes(termoNormalizado),
+          professor.descricao.toLowerCase().includes(termoNormalizado) ||
+          (professor.aulas ?? []).some((aula) => aula.titulo.toLowerCase().includes(termoNormalizado)),
       )
     : professores;
 

@@ -1,47 +1,34 @@
-import { getUsuario } from "./authService";
+import Api from "../config/api";
 import type { AtualizarPerfilProfessorRequest, PerfilProfessorDTO } from "../types/professorPerfil";
 
-const ATRASO_MOCK_MS = 500;
+// A API devolve campos ainda não preenchidos como null, data com hora e valorHora 0 quando
+// não definido; a tela trabalha com strings vazias, "yyyy-mm-dd" e null.
+type PerfilProfessorApi = Omit<PerfilProfessorDTO, "cpf" | "areaEspecialidade" | "anosExperiencia" | "miniBiografia"> & {
+  cpf: string | null;
+  areaEspecialidade: string | null;
+  anosExperiencia: string | null;
+  miniBiografia: string | null;
+};
 
-function chaveMock(professorId: number): string {
-  return `knowhow:professor-perfil-mock:${professorId}`;
-}
-
-// Mock: endpoints de perfil do professor ainda não existem na API.
-// Quando existirem, trocar os corpos por:
-//   GET /Professor/perfil -> Api.get<PerfilProfessorDTO>("/Professor/perfil")
-//   PUT /Professor/perfil -> Api.put<PerfilProfessorDTO>("/Professor/perfil", dados)
-export async function getPerfilProfessor(): Promise<PerfilProfessorDTO> {
-  const usuario = getUsuario();
-  const bruto = usuario ? localStorage.getItem(chaveMock(usuario.id)) : null;
-  const salvo: Partial<PerfilProfessorDTO> = bruto ? JSON.parse(bruto) : {};
-
-  const perfil: PerfilProfessorDTO = {
-    id: usuario?.id ?? 0,
-    nome: usuario?.nome ?? "",
-    email: usuario?.email ?? "",
-    cpf: "",
-    dataNascimento: "",
-    areaEspecialidade: "",
-    anosExperiencia: "",
-    miniBiografia: "",
-    valorHora: null,
-    disponivel: true,
-    fotoPerfilBase64: null,
-    ...salvo,
+function normalizar(perfil: PerfilProfessorApi): PerfilProfessorDTO {
+  return {
+    ...perfil,
+    cpf: perfil.cpf ?? "",
+    dataNascimento: perfil.dataNascimento ? perfil.dataNascimento.slice(0, 10) : "",
+    areaEspecialidade: perfil.areaEspecialidade ?? "",
+    anosExperiencia: perfil.anosExperiencia ?? "",
+    miniBiografia: perfil.miniBiografia ?? "",
+    valorHora: perfil.valorHora ? perfil.valorHora : null,
+    fotoPerfilBase64: perfil.fotoPerfilBase64 ?? null,
   };
-
-  return new Promise((resolve) => setTimeout(() => resolve(perfil), ATRASO_MOCK_MS));
 }
 
-export async function atualizarPerfilProfessor(
-  dados: AtualizarPerfilProfessorRequest,
-): Promise<PerfilProfessorDTO> {
-  const usuario = getUsuario();
-  const professorId = usuario?.id ?? 0;
-  const perfilAtualizado: PerfilProfessorDTO = { id: professorId, ...dados, fotoPerfilBase64: dados.fotoPerfilBase64 ?? null };
+export async function getPerfilProfessor(): Promise<PerfilProfessorDTO> {
+  const response = await Api.get<PerfilProfessorApi>("/Professor/perfil");
+  return normalizar(response.data);
+}
 
-  localStorage.setItem(chaveMock(professorId), JSON.stringify(perfilAtualizado));
-
-  return new Promise((resolve) => setTimeout(() => resolve(perfilAtualizado), ATRASO_MOCK_MS));
+export async function atualizarPerfilProfessor(dados: AtualizarPerfilProfessorRequest): Promise<PerfilProfessorDTO> {
+  const response = await Api.put<PerfilProfessorApi>("/Professor/perfil", dados);
+  return normalizar(response.data);
 }

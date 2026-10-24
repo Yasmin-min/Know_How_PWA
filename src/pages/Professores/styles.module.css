@@ -152,7 +152,8 @@
 
 .grade {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr));
+  align-items: start;
   gap: 20px;
 }
 
@@ -277,6 +278,7 @@
 .cardAvaliacao {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: 5px;
   font-size: 13px;
   font-weight: 600;
@@ -292,6 +294,7 @@
 }
 
 .cardAvaliacaoTotal {
+  white-space: nowrap;
   font-weight: 400;
   color: var(--cor-texto-secundario);
 }
@@ -308,10 +311,97 @@
   overflow: hidden;
 }
 
+.aulas {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 12px;
+  border-top: 1px solid var(--cor-borda);
+}
+
+.aulasTitulo {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--cor-texto-secundario);
+  margin: 0;
+}
+
+.aulasLista {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.aulaItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: var(--cor-primaria-bg);
+}
+
+.aulaInfo {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.aulaNome {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--cor-texto);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.aulaDetalhes {
+  font-size: 11.5px;
+  color: var(--cor-texto-secundario);
+}
+
+.aulaValor {
+  flex-shrink: 0;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--cor-primaria);
+  white-space: nowrap;
+}
+
+.aulasVerMais {
+  align-self: flex-start;
+  padding: 0;
+  border: none;
+  background: transparent;
+  font-family: inherit;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--cor-primaria);
+  cursor: pointer;
+}
+
+.aulasVerMais:hover {
+  text-decoration: underline;
+}
+
+.aulasVerMais:focus-visible {
+  outline: 2px solid var(--cor-primaria);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
 .cardRodape {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
   gap: 12px;
   margin-top: auto;
   padding-top: 4px;
@@ -333,7 +423,6 @@
 .cardBotoes {
   display: flex;
   align-items: center;
-  flex-wrap: wrap;
   gap: 8px;
 }
 

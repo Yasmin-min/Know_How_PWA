@@ -24,6 +24,9 @@ interface FormularioNovaAulaProps {
   salvandoRascunho: boolean;
   onPublicar: () => void;
   onSalvarRascunho: () => void;
+  mostrarRascunho?: boolean;
+  textoPrimario?: string;
+  textoPrimarioCarregando?: string;
 }
 
 function FormularioNovaAula({
@@ -33,6 +36,9 @@ function FormularioNovaAula({
   salvandoRascunho,
   onPublicar,
   onSalvarRascunho,
+  mostrarRascunho = true,
+  textoPrimario = "Publicar aula",
+  textoPrimarioCarregando = "Publicando...",
 }: FormularioNovaAulaProps) {
   const [tocados, setTocados] = useState<CamposTocados>({
     titulo: false,
@@ -247,30 +253,32 @@ function FormularioNovaAula({
       </section>
 
       <div className={styles.acoesFormulario}>
-        <button
-          type="button"
-          className={styles.botaoSecundario}
-          disabled={carregando}
-          onClick={handleSalvarRascunho}
-        >
-          {salvandoRascunho ? (
-            <>
-              <IconSpinner className={styles.spinner} />
-              Salvando...
-            </>
-          ) : (
-            "Salvar rascunho"
-          )}
-        </button>
+        {mostrarRascunho ? (
+          <button
+            type="button"
+            className={styles.botaoSecundario}
+            disabled={carregando}
+            onClick={handleSalvarRascunho}
+          >
+            {salvandoRascunho ? (
+              <>
+                <IconSpinner className={styles.spinner} />
+                Salvando...
+              </>
+            ) : (
+              "Salvar rascunho"
+            )}
+          </button>
+        ) : null}
 
         <button type="submit" className={styles.botaoPrimario} disabled={carregando}>
           {publicando ? (
             <>
               <IconSpinner className={styles.spinner} />
-              Publicando...
+              {textoPrimarioCarregando}
             </>
           ) : (
-            "Publicar aula"
+            textoPrimario
           )}
         </button>
       </div>

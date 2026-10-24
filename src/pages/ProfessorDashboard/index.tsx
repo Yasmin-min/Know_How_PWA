@@ -70,7 +70,7 @@ function ProfessorDashboard() {
               valor={String(dados.indicadores.aulasAtivas)}
               rotulo="Aulas ativas"
               linkTexto="Ver todas"
-              linkRota={rotas.professorAulas}
+              linkRota={rotas.professorCatalogo}
             />
             <CartaoIndicador
               Icone={IconUsuarios}
@@ -107,7 +107,7 @@ function ProfessorDashboard() {
             <div className={styles.cartaoSecaoTopo}>
               <h2 className={styles.cartaoSecaoTitulo}>Minhas aulas</h2>
               <div className={styles.minhasAulasAcoes}>
-                <Link to={rotas.professorAulas} className={styles.cartaoSecaoLink}>
+                <Link to={rotas.professorCatalogo} className={styles.cartaoSecaoLink}>
                   Ver todas
                 </Link>
                 <Link to={rotas.professorAulaNova} className={styles.botaoNovaAula}>

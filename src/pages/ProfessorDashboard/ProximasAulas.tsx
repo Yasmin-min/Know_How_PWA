@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
-import rotas from "../../config/rotas";
-import { IconUsuario, IconSeta } from "../Cadastro/icons";
+import rotas, { rotaChamada } from "../../config/rotas";
+import { salaAberta } from "../../features/Chamada/janela";
+import { IconSeta } from "../Cadastro/icons";
+import AvatarIniciais from "../../features/Chat/AvatarIniciais";
 import { IconNovaAula } from "../../base/BaseProfessor/icons";
 import type { AulaProxima, StatusAula } from "../../types/professorDashboard";
 import styles from "./styles.module.css";
@@ -16,8 +18,6 @@ const STATUS_CLASSE: Record<StatusAula, string> = {
   agendada: styles.statusAgendada,
   cancelada: styles.statusCancelada,
 };
-
-const AVATARES_PLACEHOLDER_MAXIMO = 3;
 
 interface ProximasAulasProps {
   aulas: AulaProxima[];
@@ -44,38 +44,37 @@ function ProximasAulas({ aulas }: ProximasAulasProps) {
         </div>
       ) : (
         <ul className={styles.listaAulas}>
-          {aulas.map((aula) => (
-            <li key={aula.id}>
-              <Link to={rotas.professorAulas} className={styles.itemAula}>
-                <div className={styles.itemAulaData}>
-                  <span className={styles.itemAulaMes}>{aula.dataMes}</span>
-                  <span className={styles.itemAulaDia}>{aula.dataDia}</span>
-                </div>
-
-                <div className={styles.itemAulaInfo}>
-                  <p className={styles.itemAulaTitulo}>{aula.titulo}</p>
-                  <p className={styles.itemAulaHorario}>{aula.diaSemanaHorario}</p>
-                  <div className={styles.itemAulaAlunos}>
-                    <span className={styles.avataresAlunos}>
-                      {Array.from({ length: Math.min(aula.totalAlunos, AVATARES_PLACEHOLDER_MAXIMO) }).map(
-                        (_, indice) => (
-                          <span className={styles.avatarAlunoPlaceholder} key={indice}>
-                            <IconUsuario />
-                          </span>
-                        ),
-                      )}
-                    </span>
-                    <span className={styles.itemAulaAlunosTexto}>+{aula.totalAlunos} alunos</span>
+          {aulas.map((aula) => {
+            const podeEntrar = aula.status === "agendada" && salaAberta(aula.inicio, aula.duracaoMinutos);
+            return (
+              <li key={aula.id}>
+                <Link to={podeEntrar ? rotaChamada(aula.id) : rotas.professorAulas} className={styles.itemAula}>
+                  <div className={styles.itemAulaData}>
+                    <span className={styles.itemAulaMes}>{aula.dataMes}</span>
+                    <span className={styles.itemAulaDia}>{aula.dataDia}</span>
                   </div>
-                </div>
 
-                <span className={`${styles.statusPill} ${STATUS_CLASSE[aula.status]}`}>
-                  {STATUS_LABEL[aula.status]}
-                </span>
-                <IconSeta className={styles.itemAulaSeta} />
-              </Link>
-            </li>
-          ))}
+                  <div className={styles.itemAulaInfo}>
+                    <p className={styles.itemAulaTitulo}>{aula.titulo}</p>
+                    <p className={styles.itemAulaHorario}>{aula.diaSemanaHorario}</p>
+                    <div className={styles.itemAulaAlunos}>
+                      <AvatarIniciais id={aula.alunoId} nome={aula.alunoNome} className={styles.avatarAluno} />
+                      <span className={styles.itemAulaAlunosTexto}>{aula.alunoNome}</span>
+                    </div>
+                  </div>
+
+                  {podeEntrar ? (
+                    <span className={`${styles.statusPill} ${styles.statusConfirmada}`}>Entrar na aula</span>
+                  ) : (
+                    <span className={`${styles.statusPill} ${STATUS_CLASSE[aula.status]}`}>
+                      {STATUS_LABEL[aula.status]}
+                    </span>
+                  )}
+                  <IconSeta className={styles.itemAulaSeta} />
+                </Link>
+              </li>
+            );
+          })}
         </ul>
       )}
     </section>

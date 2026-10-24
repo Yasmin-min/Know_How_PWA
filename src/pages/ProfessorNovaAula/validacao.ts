@@ -1,7 +1,8 @@
 import { isAxiosError } from "axios";
 import { DESCRICAO_MAX, TITULO_MAX } from "./types";
 import type { ErrosNovaAula, FormularioNovaAulaData } from "./types";
-import type { CriarAulaRequest } from "../../types/professorAula";
+import type { AulaResponse, CriarAulaRequest } from "../../types/professorAula";
+import type { StatusMinhaAula } from "../../types/professorDashboard";
 
 export function formatarValorMonetario(valorDigitado: string): string {
   const somenteDigitos = valorDigitado.replace(/\D/g, "").slice(0, 9);
@@ -62,10 +63,22 @@ export function duracaoParaMinutos(duracao: string): number | null {
   return DURACAO_PARA_MINUTOS[duracao] ?? null;
 }
 
-export function construirPayloadAula(
+export function aulaParaFormulario(aula: AulaResponse): FormularioNovaAulaData {
+  const duracao = Object.entries(DURACAO_PARA_MINUTOS).find(([, minutos]) => minutos === aula.duracaoMinutos);
+  return {
+    titulo: aula.titulo,
+    descricao: aula.descricao,
+    materia: aula.materia ?? "",
+    valor: aula.valor !== null ? formatarValorMonetario(String(Math.round(aula.valor * 100))) : "",
+    duracao: duracao?.[0] ?? "",
+    nivel: aula.nivel ?? "",
+  };
+}
+
+export function construirPayloadAula<S extends StatusMinhaAula>(
   dados: FormularioNovaAulaData,
-  status: CriarAulaRequest["status"],
-): CriarAulaRequest {
+  status: S,
+): Omit<CriarAulaRequest, "status"> & { status: S } {
   return {
     titulo: dados.titulo,
     descricao: dados.descricao,
@@ -85,7 +98,7 @@ export function interpretarErroApi(erro: unknown, mensagemPadrao: string): strin
   const mensagemApi = typeof data?.message === "string" ? data.message : null;
 
   if (status === 401) return "Sua sessão expirou. Faça login novamente.";
-  if (status === 403) return "Você não possui permissão para realizar esta ação.";
+  if (status === 403) return mensagemApi ?? "Você não possui permissão para realizar esta ação.";
 
   return mensagemApi ?? mensagemPadrao;
 }

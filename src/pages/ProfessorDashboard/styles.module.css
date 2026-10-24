@@ -323,30 +323,17 @@
   gap: 8px;
 }
 
-.avataresAlunos {
-  display: flex;
-}
-
-.avatarAlunoPlaceholder {
-  display: flex;
+.avatarAluno {
+  display: inline-flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
   width: 22px;
   height: 22px;
-  margin-left: -6px;
   border-radius: 50%;
-  border: 2px solid var(--ph-card-bg);
-  background: #ede9fe;
-  color: #7c3aed;
-}
-
-.avatarAlunoPlaceholder:first-child {
-  margin-left: 0;
-}
-
-.avatarAlunoPlaceholder svg {
-  width: 11px;
-  height: 11px;
+  color: #ffffff;
+  font-size: 9.5px;
+  font-weight: 700;
 }
 
 .itemAulaAlunosTexto {
@@ -541,14 +528,6 @@
   box-shadow: 0 1px 2px rgba(16, 15, 20, 0.03);
 }
 
-.capaAula {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 110px;
-}
-
 .capaAulaAlunos {
   position: absolute;
   top: 10px;
@@ -559,37 +538,6 @@
   color: #ffffff;
   font-size: 11px;
   font-weight: 600;
-}
-
-.capaReact {
-  background: radial-gradient(circle, #0f2a44 0%, #08131f 100%);
-}
-
-.capaReact .capaAulaMarcaIcone {
-  width: 48px;
-  height: 48px;
-  color: #61dafb;
-}
-
-.capaJavascript {
-  background: #f0db4f;
-}
-
-.capaJavascript .capaAulaMarcaTexto {
-  font-size: 32px;
-  font-weight: 800;
-  color: #12161c;
-}
-
-.capaNode {
-  background: linear-gradient(135deg, #6d28d9 0%, #a21caf 100%);
-}
-
-.capaNode .capaAulaMarcaTexto {
-  font-size: 24px;
-  font-weight: 800;
-  font-style: italic;
-  color: #ffffff;
 }
 
 .cartaoAulaCorpo {
@@ -631,6 +579,11 @@
 .cartaoAulaMenu:hover {
   background: #f4f5f7;
   color: var(--ph-texto);
+}
+
+.cartaoAulaMenu svg {
+  width: 15px;
+  height: 15px;
 }
 
 .cartaoAulaMenu:focus-visible {

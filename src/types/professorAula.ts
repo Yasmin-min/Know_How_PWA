@@ -10,6 +10,10 @@ export interface CriarAulaRequest {
   status: Extract<StatusMinhaAula, "ativa" | "rascunho">;
 }
 
+export interface AtualizarAulaRequest extends Omit<CriarAulaRequest, "status"> {
+  status: StatusMinhaAula;
+}
+
 export interface AulaResponse {
   id: number;
   titulo: string;

@@ -1,8 +1,9 @@
 import { useNavigate } from "react-router-dom";
 import AvatarProfessor from "./AvatarProfessor";
+import AulasOferecidas from "./AulasOferecidas";
 import { IconEstrela } from "./icons";
 import { IconChat } from "../../base/BaseGeral/icons";
-import rotas from "../../config/rotas";
+import rotas, { rotaPerfilProfessor } from "../../config/rotas";
 import type { Professor } from "../../types/professor";
 import styles from "./styles.module.css";
 
@@ -12,6 +13,11 @@ interface ProfessorCardProps {
 
 function ProfessorCard({ professor }: ProfessorCardProps) {
   const navigate = useNavigate();
+
+  function aoVerPerfil() {
+    // O professor vai no state para a página abrir na hora, sem esperar a API.
+    navigate(rotaPerfilProfessor(professor.id), { state: { professor } });
+  }
 
   function aoConversar() {
     navigate(rotas.conversas, {
@@ -44,13 +50,15 @@ function ProfessorCard({ professor }: ProfessorCardProps) {
 
       <p className={styles.cardDescricao}>{professor.descricao}</p>
 
+      <AulasOferecidas aulas={professor.aulas ?? []} />
+
       <div className={styles.cardRodape}>
         <span className={styles.cardValor}>
           R$ {professor.valorHora}
           <small>/h</small>
         </span>
         <div className={styles.cardBotoes}>
-          <button type="button" className={styles.botaoVerPerfil}>
+          <button type="button" className={styles.botaoVerPerfil} onClick={aoVerPerfil}>
             Ver perfil
           </button>
           <button type="button" className={styles.botaoConversar} onClick={aoConversar}>

@@ -13,7 +13,11 @@ export interface AulaProxima {
   dataDia: string;
   dataMes: string;
   diaSemanaHorario: string;
-  totalAlunos: number;
+  alunoId: number;
+  alunoNome: string;
+  // Para saber se a sala de vídeo já está aberta.
+  inicio: string;
+  duracaoMinutos: number;
   status: StatusAula;
 }
 
@@ -36,9 +40,9 @@ export interface MinhaAula {
   id: number;
   titulo: string;
   descricao: string;
+  materia: string | null;
   totalAlunos: number;
   status: StatusMinhaAula;
-  capaVariante: "react" | "javascript" | "node";
 }
 
 export interface ProfessorDashboardDTO {
