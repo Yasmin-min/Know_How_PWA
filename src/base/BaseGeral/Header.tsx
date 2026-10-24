@@ -2,9 +2,11 @@ import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { IconCapelo } from "../../pages/Login/icons";
 import { IconUsuario } from "../../pages/Cadastro/icons";
-import { IconChat, IconCalendario, IconSino, IconChevronBaixo, IconSair } from "./icons";
+import { IconChat, IconCalendario, IconChevronBaixo, IconSair } from "./icons";
+import BotaoNotificacoes from "../../features/Notificacoes/BotaoNotificacoes";
 import { IconConfiguracoes } from "../BaseProfessor/icons";
 import { getUsuario, logout } from "../../services/authService";
+import FotoUsuario from "../../features/Foto/FotoUsuario";
 import rotas from "../../config/rotas";
 import styles from "./styles.module.css";
 
@@ -49,15 +51,11 @@ function Header() {
           <IconChat className={styles.navIcone} />
           Conversas
         </Link>
-        <button type="button" className={styles.navItem}>
+        <Link to={rotas.aulasAluno} className={styles.navItem}>
           <IconCalendario className={styles.navIcone} />
           Aulas
-        </button>
-        <button type="button" className={styles.navItem}>
-          <IconSino className={styles.navIcone} />
-          Notificações
-          <span className={styles.navBadge} aria-hidden="true" />
-        </button>
+        </Link>
+        <BotaoNotificacoes perfil="aluno" classeBotao={styles.navItem} classeIcone={styles.navIcone} rotulo="Notificações" />
       </nav>
 
       <div className={styles.usuarioContainer} ref={menuRef}>
@@ -70,6 +68,7 @@ function Header() {
         >
           <span className={styles.usuarioAvatar}>
             <IconUsuario className={styles.usuarioAvatarIcone} />
+            <FotoUsuario usuarioId={usuario?.id} />
           </span>
           <span className={styles.usuarioNome}>Olá, {primeiroNome}</span>
           <IconChevronBaixo className={styles.usuarioChevron} />

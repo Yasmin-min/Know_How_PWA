@@ -8,6 +8,8 @@ import { IconChat, IconCalendario } from "../BaseGeral/icons";
 import { IconEstrela } from "../../pages/Professores/icons";
 import { IconSeta } from "../../pages/Cadastro/icons";
 import { IconHome, IconLivroAberto, IconUsuarios, IconNovaAula, IconCarteira, IconConfiguracoes } from "./icons";
+import { useNotificacoesCompartilhadas } from "../../features/Notificacoes/contexto";
+import FotoUsuario from "../../features/Foto/FotoUsuario";
 import styles from "./styles.module.css";
 
 interface ItemMenu {
@@ -18,18 +20,16 @@ interface ItemMenu {
   badge?: number;
 }
 
-const MENSAGENS_NAO_LIDAS_MOCK = 3;
-
 const MENU_PRINCIPAL: ItemMenu[] = [
   { rota: rotas.professorPainel, label: "Início", Icone: IconHome, fim: true },
-  { rota: rotas.professorAulas, label: "Minhas Aulas", Icone: IconLivroAberto },
+  { rota: rotas.professorAulas, label: "Minhas Aulas", Icone: IconLivroAberto, fim: true },
   { rota: rotas.professorAlunos, label: "Alunos", Icone: IconUsuarios },
   { rota: rotas.professorAgenda, label: "Agenda", Icone: IconCalendario },
-  { rota: rotas.professorMensagens, label: "Mensagens", Icone: IconChat, badge: MENSAGENS_NAO_LIDAS_MOCK },
+  { rota: rotas.professorMensagens, label: "Mensagens", Icone: IconChat },
 ];
 
 const MENU_GESTAO: ItemMenu[] = [
-  { rota: rotas.professorAulaNova, label: "Nova Aula", Icone: IconNovaAula },
+  { rota: rotas.professorCatalogo, label: "Catálogo de aulas", Icone: IconNovaAula },
   { rota: rotas.professorPlanos, label: "Planos e Preços", Icone: IconCarteira },
   { rota: rotas.professorAvaliacoes, label: "Avaliações", Icone: IconEstrela },
   { rota: rotas.professorConfiguracoes, label: "Configurações", Icone: IconConfiguracoes },
@@ -53,7 +53,7 @@ function ListaMenu({ itens, onNavegar }: { itens: ItemMenu[]; onNavegar: () => v
           >
             <Icone className={styles.itemMenuIcone} />
             <span className={styles.itemMenuLabel}>{label}</span>
-            {badge ? <span className={styles.itemMenuBadge}>{badge}</span> : null}
+            {badge ? <span className={styles.itemMenuBadge}>{badge > 99 ? "99+" : badge}</span> : null}
           </NavLink>
         </li>
       ))}
@@ -63,6 +63,10 @@ function ListaMenu({ itens, onNavegar }: { itens: ItemMenu[]; onNavegar: () => v
 
 function Sidebar({ aberta, onFechar }: SidebarProps) {
   const usuario = getUsuario();
+  const { mensagensNaoLidas } = useNotificacoesCompartilhadas();
+  const menuPrincipal = MENU_PRINCIPAL.map((item) =>
+    item.rota === rotas.professorMensagens ? { ...item, badge: mensagensNaoLidas } : item,
+  );
   const primeiroNome = usuario?.nome.trim().split(" ")[0] ?? "Professor";
 
   return (
@@ -82,6 +86,7 @@ function Sidebar({ aberta, onFechar }: SidebarProps) {
         <div className={styles.cartaoProfessor}>
           <span className={styles.avatarProfessor}>
             <IconUsuario className={styles.avatarProfessorIcone} />
+            <FotoUsuario usuarioId={usuario?.id} />
           </span>
           <div className={styles.cartaoProfessorTextos}>
             <p className={styles.saudacaoProfessor}>Olá, {primeiroNome} 👋</p>
@@ -91,7 +96,7 @@ function Sidebar({ aberta, onFechar }: SidebarProps) {
 
         <nav className={styles.navegacao} aria-label="Navegação do painel do professor">
           <span className={styles.secaoTitulo}>Geral</span>
-          <ListaMenu itens={MENU_PRINCIPAL} onNavegar={onFechar} />
+          <ListaMenu itens={menuPrincipal} onNavegar={onFechar} />
 
           <span className={styles.secaoTitulo}>Gestão</span>
           <ListaMenu itens={MENU_GESTAO} onNavegar={onFechar} />

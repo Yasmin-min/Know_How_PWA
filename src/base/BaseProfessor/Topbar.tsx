@@ -3,11 +3,11 @@ import { useNavigate } from "react-router-dom";
 import rotas from "../../config/rotas";
 import { getUsuario, logout } from "../../services/authService";
 import { IconUsuario } from "../../pages/Cadastro/icons";
-import { IconSino, IconChevronBaixo } from "../BaseGeral/icons";
+import { IconChevronBaixo } from "../BaseGeral/icons";
+import BotaoNotificacoes from "../../features/Notificacoes/BotaoNotificacoes";
 import { IconMenu, IconLogout } from "./icons";
+import FotoUsuario from "../../features/Foto/FotoUsuario";
 import styles from "./styles.module.css";
-
-const NOTIFICACOES_NAO_LIDAS_MOCK = true;
 
 interface TopbarProps {
   onAbrirMenu: () => void;
@@ -30,10 +30,7 @@ function Topbar({ onAbrirMenu }: TopbarProps) {
       </button>
 
       <div className={styles.topbarAcoes}>
-        <button type="button" className={styles.botaoNotificacao} aria-label="Notificações">
-          <IconSino />
-          {NOTIFICACOES_NAO_LIDAS_MOCK ? <span className={styles.notificacaoIndicador} aria-hidden="true" /> : null}
-        </button>
+        <BotaoNotificacoes perfil="professor" classeBotao={styles.botaoNotificacao} />
 
         <div className={styles.menuUsuario}>
           <button
@@ -44,6 +41,7 @@ function Topbar({ onAbrirMenu }: TopbarProps) {
           >
             <span className={styles.avatarUsuario}>
               <IconUsuario className={styles.avatarUsuarioIcone} />
+              <FotoUsuario usuarioId={usuario?.id} />
             </span>
             <span className={styles.nomeUsuario}>{usuario?.nome ?? "Professor"}</span>
             <IconChevronBaixo className={styles.chevronUsuario} />

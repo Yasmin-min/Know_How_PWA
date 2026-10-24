@@ -1,0 +1,213 @@
+/* Funciona nos dois layouts: usa as cores do professor (--ph-*) ou do aluno (--cor-*). */
+.container {
+  --nt-accent: var(--ph-accent, var(--cor-primaria, #14b8a6));
+  --nt-accent-bg: var(--ph-accent-bg, var(--cor-primaria-bg, rgba(20, 184, 166, 0.16)));
+  --nt-borda: var(--ph-border, var(--cor-borda, #e6e8eb));
+  --nt-texto: var(--ph-texto, var(--cor-texto, #12161c));
+  --nt-texto-secundario: var(--ph-texto-secundario, var(--cor-texto-secundario, #6b7280));
+
+  position: relative;
+}
+
+.contador {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  box-sizing: border-box;
+  border-radius: 999px;
+  border: 2px solid #ffffff;
+  background: #e0455f;
+  color: #ffffff;
+  font-size: 10.5px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.somenteLeitor {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.painel {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  width: 360px;
+  max-width: calc(100vw - 32px);
+  max-height: min(480px, 70vh);
+  border-radius: 14px;
+  border: 1px solid var(--nt-borda);
+  background: #ffffff;
+  box-shadow: 0 16px 40px -12px rgba(16, 15, 20, 0.25);
+  overflow: hidden;
+  animation: surgir 0.12s ease-out;
+}
+
+@keyframes surgir {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+}
+
+.painelTopo {
+  padding: 14px 16px 10px;
+  border-bottom: 1px solid var(--nt-borda);
+}
+
+.painelTitulo {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--nt-texto);
+}
+
+.lista {
+  list-style: none;
+  margin: 0;
+  padding: 6px;
+  overflow-y: auto;
+}
+
+.item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  border: none;
+  border-radius: 10px;
+  background: transparent;
+  font-family: inherit;
+  text-align: left;
+  color: inherit;
+}
+
+button.item {
+  cursor: pointer;
+}
+
+button.item:hover {
+  background: #f4f5f7;
+}
+
+button.item:focus-visible {
+  outline: 2px solid var(--nt-accent);
+  outline-offset: -2px;
+}
+
+.icone,
+.avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+}
+
+.avatar {
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.iconeAula {
+  background: #fef0c7;
+  color: #b45309;
+}
+
+.icone svg {
+  width: 18px;
+  height: 18px;
+}
+
+.texto {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  flex: 1;
+}
+
+.linhaTopo {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 12.5px;
+  color: var(--nt-texto);
+}
+
+.destaqueAula {
+  color: #b45309;
+}
+
+.quando {
+  flex-shrink: 0;
+  font-size: 11.5px;
+  color: var(--nt-texto-secundario);
+}
+
+.titulo {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--nt-texto);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.detalhe {
+  font-size: 13px;
+  color: var(--nt-texto-secundario);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.vazio {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 32px 24px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--nt-texto);
+}
+
+.vazioIcone {
+  width: 28px;
+  height: 28px;
+  margin-bottom: 6px;
+  color: var(--nt-accent);
+}
+
+.vazioTexto {
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--nt-texto-secundario);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .painel {
+    animation: none;
+  }
+}

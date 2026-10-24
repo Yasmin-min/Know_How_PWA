@@ -89,16 +89,6 @@
   flex-shrink: 0;
 }
 
-.navBadge {
-  position: absolute;
-  top: 6px;
-  right: 6px;
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: #e0455f;
-}
-
 .usuarioContainer {
   position: relative;
   flex-shrink: 0;
@@ -128,6 +118,8 @@
 }
 
 .usuarioAvatar {
+  position: relative;
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;

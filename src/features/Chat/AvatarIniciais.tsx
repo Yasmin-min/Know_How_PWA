@@ -1,5 +1,7 @@
 const CORES = ["#4f2edc", "#0d9488", "#d97706", "#db2777", "#2563eb", "#ea580c"];
 
+import FotoUsuario from "../Foto/FotoUsuario";
+
 function obterCor(id: number): string {
   return CORES[Math.abs(id) % CORES.length];
 }
@@ -20,8 +22,9 @@ interface AvatarIniciaisProps {
 
 function AvatarIniciais({ id, nome, className }: AvatarIniciaisProps) {
   return (
-    <span className={className} style={{ background: obterCor(id) }} aria-hidden="true">
+    <span className={className} style={{ background: obterCor(id), position: "relative", overflow: "hidden" }} aria-hidden="true">
       {obterIniciais(nome)}
+      <FotoUsuario usuarioId={id} />
     </span>
   );
 }

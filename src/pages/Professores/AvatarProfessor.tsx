@@ -1,5 +1,6 @@
 import { IconCapelo } from "../Login/icons";
 import type { AvatarVariante } from "../../types/professor";
+import FotoUsuario from "../../features/Foto/FotoUsuario";
 import styles from "./styles.module.css";
 
 const VARIANTES: AvatarVariante[] = ["roxo", "verde", "amarelo", "rosa", "azul", "laranja"];
@@ -23,14 +24,19 @@ function obterVarianteAvatar(id: string): AvatarVariante {
 
 interface AvatarProfessorProps {
   id: string;
+  className?: string;
 }
 
-function AvatarProfessor({ id }: AvatarProfessorProps) {
-  const variante = obterVarianteAvatar(id);
+function AvatarProfessor({ id, className }: AvatarProfessorProps) {
+  const variante = obterVarianteAvatar(String(id));
 
   return (
-    <div className={`${styles.avatar} ${CORES_AVATAR[variante]}`}>
+    <div
+      className={`${styles.avatar} ${CORES_AVATAR[variante]} ${className ?? ""}`}
+      style={{ position: "relative", overflow: "hidden" }}
+    >
       <IconCapelo className={styles.avatarIcone} />
+      <FotoUsuario usuarioId={id} />
     </div>
   );
 }
