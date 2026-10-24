@@ -5,6 +5,7 @@ import { TipoUsuario } from "../../types/auth";
 import {
   enviarMensagem,
   getMensagens,
+  iniciarOuAbrirConversaComAluno,
   iniciarOuAbrirConversaComProfessor,
   listarConversas,
   marcarComoLida,
@@ -24,9 +25,11 @@ export interface ParticipanteParaIniciar {
 
 interface ChatPainelProps {
   participanteParaIniciar?: ParticipanteParaIniciar | null;
+  // Lado do professor: abre (ou inicia) a conversa com este aluno.
+  alunoIdParaAbrir?: number | null;
 }
 
-function ChatPainel({ participanteParaIniciar }: ChatPainelProps) {
+function ChatPainel({ participanteParaIniciar, alunoIdParaAbrir }: ChatPainelProps) {
   const usuario = getUsuario();
 
   const [conversas, setConversas] = useState<ConversaResumo[]>([]);
@@ -74,6 +77,17 @@ function ChatPainel({ participanteParaIniciar }: ChatPainelProps) {
           return;
         } catch {
           setErro("Não foi possível iniciar a conversa.");
+        }
+      }
+      if (alunoIdParaAbrir) {
+        try {
+          const existente = (await listarConversas()).find((c) => c.participanteId === alunoIdParaAbrir);
+          const conversa = existente ?? (await iniciarOuAbrirConversaComAluno(alunoIdParaAbrir));
+          setThreadAbertaMobile(true);
+          await carregarConversas(conversa.id);
+          return;
+        } catch {
+          setErro("Não foi possível abrir a conversa com este aluno.");
         }
       }
       await carregarConversas();

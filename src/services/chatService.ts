@@ -24,3 +24,8 @@ export async function iniciarOuAbrirConversaComProfessor(professorId: number): P
   const response = await Api.post<ConversaResumo>("/Chat/conversas", { professorId });
   return response.data;
 }
+
+export async function iniciarOuAbrirConversaComAluno(alunoId: number): Promise<ConversaResumo> {
+  const response = await Api.post<ConversaResumo>("/Chat/conversas/aluno", { alunoId });
+  return response.data;
+}
