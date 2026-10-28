@@ -13,6 +13,9 @@ import type { FiltrosState } from "./filtros";
 import type { Professor } from "../../types/professor";
 import styles from "./styles.module.css";
 
+// Mesmo breakpoint em que o CSS transforma o painel de filtros em tela cheia.
+const TELA_PEQUENA = "(max-width: 900px)";
+
 function mensagemErroListagem(erro: unknown): string {
   if (isAxiosError(erro)) {
     if (!erro.response) {
@@ -32,7 +35,8 @@ function Professores() {
   const [erro, setErro] = useState<string | null>(null);
   const [tentativa, setTentativa] = useState(0);
   const [filtros, setFiltros] = useState<FiltrosState | null>(null);
-  const [filtrosAbertos, setFiltrosAbertos] = useState(true);
+  // No mobile o painel cobre a tela inteira, então só abre quando o usuário toca em "Filtros".
+  const [filtrosAbertos, setFiltrosAbertos] = useState(() => !window.matchMedia(TELA_PEQUENA).matches);
 
   useEffect(() => {
     let ativo = true;
