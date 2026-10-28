@@ -4,6 +4,7 @@ import { IconCapelo } from "../../pages/Login/icons";
 import { IconUsuario } from "../../pages/Cadastro/icons";
 import { IconChat, IconCalendario, IconChevronBaixo, IconSair } from "./icons";
 import BotaoNotificacoes from "../../features/Notificacoes/BotaoNotificacoes";
+import BotaoInstalarApp from "../../features/InstalarApp/BotaoInstalarApp";
 import { IconConfiguracoes } from "../BaseProfessor/icons";
 import { getUsuario, logout } from "../../services/authService";
 import FotoUsuario from "../../features/Foto/FotoUsuario";
@@ -56,6 +57,7 @@ function Header() {
           Aulas
         </Link>
         <BotaoNotificacoes perfil="aluno" classeBotao={styles.navItem} classeIcone={styles.navIcone} rotulo="Notificações" />
+        <BotaoInstalarApp classeBotao={styles.navItem} classeIcone={styles.navIcone} rotulo="Instalar app" />
       </nav>
 
       <div className={styles.usuarioContainer} ref={menuRef}>

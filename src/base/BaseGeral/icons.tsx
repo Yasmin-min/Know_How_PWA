@@ -72,6 +72,26 @@ export function IconSino({ className }: IconProps) {
   );
 }
 
+export function IconBaixar({ className }: IconProps) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+    >
+      <path
+        d="M12 4v11m0 0-4-4m4 4 4-4M5 19h14"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 export function IconChevronBaixo({ className }: IconProps) {
   return (
     <svg

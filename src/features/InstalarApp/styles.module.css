@@ -1,0 +1,167 @@
+/* Funciona nos dois layouts: usa as cores do professor (--ph-*) ou do aluno (--cor-*). */
+.container {
+  --ia-accent: var(--ph-accent, var(--cor-primaria, #14b8a6));
+  --ia-accent-bg: var(--ph-accent-bg, var(--cor-primaria-bg, rgba(20, 184, 166, 0.16)));
+  --ia-borda: var(--ph-border, var(--cor-borda, #e6e8eb));
+  --ia-texto: var(--ph-texto, var(--cor-texto, #12161c));
+  --ia-texto-secundario: var(--ph-texto-secundario, var(--cor-texto-secundario, #6b7280));
+
+  position: relative;
+}
+
+.painel {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  width: 360px;
+  max-width: calc(100vw - 32px);
+  max-height: min(520px, 75vh);
+  border-radius: 14px;
+  border: 1px solid var(--ia-borda);
+  background: #ffffff;
+  box-shadow: 0 16px 40px -12px rgba(16, 15, 20, 0.25);
+  overflow: hidden;
+  animation: surgir 0.12s ease-out;
+  /* O painel herda font-size: 0 do item de navegação no mobile do aluno. */
+  font-size: 14px;
+  font-weight: 400;
+  text-align: left;
+  cursor: default;
+}
+
+@keyframes surgir {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+}
+
+.painelTopo {
+  padding: 14px 16px 12px;
+  border-bottom: 1px solid var(--ia-borda);
+}
+
+.painelTitulo {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--ia-texto);
+}
+
+.painelSubtitulo {
+  margin: 4px 0 0;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--ia-texto-secundario);
+}
+
+.corpo {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 14px 16px 16px;
+  overflow-y: auto;
+}
+
+.botaoInstalar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 40px;
+  border: none;
+  border-radius: 10px;
+  background: var(--ia-accent);
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.botaoInstalar:hover {
+  filter: brightness(0.94);
+}
+
+.botaoInstalar:focus-visible,
+.aba:focus-visible {
+  outline: 2px solid var(--ia-accent);
+  outline-offset: 2px;
+}
+
+.botaoInstalarIcone {
+  width: 18px;
+  height: 18px;
+}
+
+.abas {
+  display: flex;
+  gap: 4px;
+  padding: 3px;
+  border-radius: 10px;
+  background: #f4f5f7;
+}
+
+.aba {
+  flex: 1;
+  height: 32px;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--ia-texto-secundario);
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.abaAtiva {
+  background: #ffffff;
+  color: var(--ia-accent);
+  box-shadow: 0 1px 3px rgba(16, 15, 20, 0.12);
+}
+
+.passos {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: passo;
+}
+
+.passos li {
+  position: relative;
+  min-height: 24px;
+  padding-left: 34px;
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: var(--ia-texto);
+  counter-increment: passo;
+}
+
+.passos li::before {
+  content: counter(passo);
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--ia-accent-bg);
+  color: var(--ia-accent);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .painel {
+    animation: none;
+  }
+}

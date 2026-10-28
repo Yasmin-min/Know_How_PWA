@@ -5,6 +5,7 @@ import { getUsuario, logout } from "../../services/authService";
 import { IconUsuario } from "../../pages/Cadastro/icons";
 import { IconChevronBaixo } from "../BaseGeral/icons";
 import BotaoNotificacoes from "../../features/Notificacoes/BotaoNotificacoes";
+import BotaoInstalarApp from "../../features/InstalarApp/BotaoInstalarApp";
 import { IconMenu, IconLogout } from "./icons";
 import FotoUsuario from "../../features/Foto/FotoUsuario";
 import styles from "./styles.module.css";
@@ -30,6 +31,7 @@ function Topbar({ onAbrirMenu }: TopbarProps) {
       </button>
 
       <div className={styles.topbarAcoes}>
+        <BotaoInstalarApp classeBotao={styles.botaoNotificacao} />
         <BotaoNotificacoes perfil="professor" classeBotao={styles.botaoNotificacao} />
 
         <div className={styles.menuUsuario}>
