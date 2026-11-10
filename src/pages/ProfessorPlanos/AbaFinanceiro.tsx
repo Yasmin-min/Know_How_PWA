@@ -84,6 +84,7 @@ function AbaFinanceiro({ precos, pacotes, planos, contratacoes, onContratacoes, 
   const hoje = new Date();
   const resumo = montarResumoFinanceiro(contratacoes, hoje);
   const nomeMes = formatoMes.format(hoje);
+  const nomeMesAnterior = formatoMes.format(new Date(hoje.getFullYear(), hoje.getMonth() - 1, 1));
   const variacao =
     resumo.recebidoMesAnterior > 0
       ? Math.round(((resumo.recebidoNoMes - resumo.recebidoMesAnterior) / resumo.recebidoMesAnterior) * 100)
@@ -167,6 +168,7 @@ function AbaFinanceiro({ precos, pacotes, planos, contratacoes, onContratacoes, 
         await excluirContratacao(contratacao.id);
         onContratacoes(contratacoes.filter((item) => item.id !== contratacao.id));
         setConfirmandoExclusaoId(null);
+        onAviso({ tipo: "sucesso", texto: `Venda de ${contratacao.alunoNome} excluída.` });
       },
       "Não foi possível excluir o registro.",
     );
@@ -198,8 +200,8 @@ function AbaFinanceiro({ precos, pacotes, planos, contratacoes, onContratacoes, 
           <span className={styles.indicadorValor}>{formatoMoeda.format(resumo.recebidoNoMes)}</span>
           <span className={styles.indicadorDetalhe}>
             {variacao === null
-              ? "Sem recebimentos no mês anterior"
-              : `${variacao >= 0 ? "+" : ""}${variacao}% em relação ao mês anterior`}
+              ? `Sem base de comparação: nada recebido em ${nomeMesAnterior}`
+              : `${variacao >= 0 ? "+" : ""}${variacao}% em relação a ${nomeMesAnterior}`}
           </span>
         </div>
         <div className={`${styles.indicador} ${resumo.aReceber > 0 ? styles.indicadorAlerta : ""}`}>

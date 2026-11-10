@@ -110,6 +110,7 @@ function AbaPrecos({ precos, onSalvo, onAviso }: AbaPrecosProps) {
           <p className={styles.cartaoTexto}>
             Por padrão, cada duração custa o proporcional da hora. Preencha um valor só se quiser cobrar diferente
             (ex.: aulas de 30 min um pouco mais caras).
+            {!valorHora ? " Informe o valor da hora para editar estes preços." : ""}
           </p>
           <div className={styles.tabelaDuracoes} role="table" aria-label="Preço por duração">
             <div className={styles.tabelaCabecalho} role="row">
@@ -135,6 +136,7 @@ function AbaPrecos({ precos, onSalvo, onAviso }: AbaPrecosProps) {
                       className={`${styles.input} ${styles.inputCompacto}`}
                       placeholder={proporcional ? formatarValorMonetario(String(Math.round(proporcional * 100))) : "0,00"}
                       value={personalizado}
+                      disabled={!valorHora}
                       onChange={(e) => atualizarPersonalizado(duracao, e.target.value)}
                       aria-label={`Preço personalizado para ${formatarDuracao(duracao)}`}
                     />
@@ -227,7 +229,7 @@ function AbaPrecos({ precos, onSalvo, onAviso }: AbaPrecosProps) {
           </div>
           <ul className={styles.previaLista}>
             {DURACOES_PRECO.map((duracao) => {
-              const personalizado = valorMonetarioParaNumero(dados.personalizados[duracao] ?? "");
+              const personalizado = valorHora ? valorMonetarioParaNumero(dados.personalizados[duracao] ?? "") : null;
               const valor = personalizado ?? (valorHora ? precoProporcional(valorHora, duracao) : null);
               return (
                 <li key={duracao}>
