@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import rotas, { rotaEditarAula } from "../../config/rotas";
 import { alterarStatusAula, listarAulas } from "../../services/professorAulaService";
 import { interpretarErroApi } from "../ProfessorNovaAula/validacao";
@@ -60,7 +60,19 @@ function ProfessorCatalogo() {
   const [filtro, setFiltro] = useState<Filtro>("todas");
   const [termo, setTermo] = useState("");
   const [alterandoId, setAlterandoId] = useState<number | null>(null);
-  const [aviso, setAviso] = useState<{ tipo: "sucesso" | "erro"; texto: string } | null>(null);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const [aviso, setAviso] = useState<{ tipo: "sucesso" | "erro"; texto: string } | null>(() => {
+    const texto = (location.state as { aviso?: string } | null)?.aviso;
+    return texto ? { tipo: "sucesso", texto } : null;
+  });
+
+  // Limpa o estado da navegação para o aviso não reaparecer ao recarregar.
+  useEffect(() => {
+    if ((location.state as { aviso?: string } | null)?.aviso) {
+      navigate(location.pathname, { replace: true, state: null });
+    }
+  }, [location.pathname, location.state, navigate]);
 
   useEffect(() => {
     let ativo = true;
@@ -209,7 +221,11 @@ function ProfessorCatalogo() {
                     <span className={styles.statusPonto} aria-hidden="true" />
                     {STATUS_LABEL[aula.status]}
                   </span>
-                  <span className={styles.capaAlunos}>
+                  <span
+                    className={styles.capaAlunos}
+                    title={`Alunos atendidos por você: ${aula.totalAlunos}`}
+                    aria-label={`Alunos atendidos por você: ${aula.totalAlunos}`}
+                  >
                     <IconUsuarios className={styles.capaAlunosIcone} />
                     {aula.totalAlunos}
                   </span>

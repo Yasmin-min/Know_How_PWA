@@ -21,8 +21,6 @@ const DADOS_INICIAIS: FormularioNovaAulaData = {
   nivel: "",
 };
 
-const REDIRECIONAMENTO_APOS_SUCESSO_MS = 1200;
-
 function ProfessorNovaAula() {
   const navigate = useNavigate();
   const { id } = useParams();
@@ -35,7 +33,6 @@ function ProfessorNovaAula() {
   const [erroCarregamento, setErroCarregamento] = useState<string | null>(null);
   const [publicando, setPublicando] = useState(false);
   const [salvandoRascunho, setSalvandoRascunho] = useState(false);
-  const [mensagemSucesso, setMensagemSucesso] = useState<string | null>(null);
   const [erroApi, setErroApi] = useState<string | null>(null);
 
   useEffect(() => {
@@ -60,7 +57,6 @@ function ProfessorNovaAula() {
 
   async function salvar(status: StatusMinhaAula, sucesso: string, falha: string, setCarregando: (v: boolean) => void) {
     setErroApi(null);
-    setMensagemSucesso(null);
     setCarregando(true);
     try {
       if (aulaId !== null) {
@@ -68,8 +64,7 @@ function ProfessorNovaAula() {
       } else {
         await criarAula(construirPayloadAula(dados, status === "rascunho" ? "rascunho" : "ativa"));
       }
-      setMensagemSucesso(sucesso);
-      setTimeout(() => navigate(rotas.professorCatalogo), REDIRECIONAMENTO_APOS_SUCESSO_MS);
+      navigate(rotas.professorCatalogo, { state: { aviso: sucesso } });
     } catch (erro) {
       setErroApi(interpretarErroApi(erro, falha));
     } finally {
@@ -115,12 +110,6 @@ function ProfessorNovaAula() {
           : "Preencha as informações da sua aula para começar a ensinar."}
       </p>
 
-      {mensagemSucesso ? (
-        <div className={styles.mensagemSucesso} role="status">
-          {mensagemSucesso}
-        </div>
-      ) : null}
-
       {erroApi ? (
         <div className={styles.mensagemErro} role="alert">
           {erroApi}
@@ -152,7 +141,13 @@ function ProfessorNovaAula() {
 
           <div className={styles.colunaLateral}>
             <DicasBoaAula />
-            <PreviaAula titulo={dados.titulo} descricao={dados.descricao} valor={dados.valor} />
+            <PreviaAula
+              titulo={dados.titulo}
+              descricao={dados.descricao}
+              valor={dados.valor}
+              duracao={dados.duracao}
+              nivel={dados.nivel}
+            />
           </div>
         </div>
       )}

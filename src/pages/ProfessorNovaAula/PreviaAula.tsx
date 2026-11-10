@@ -8,23 +8,28 @@ const EXEMPLO = {
   titulo: "Introdução ao React",
   descricao: "Do zero ao primeiro projeto",
   valor: "150,00",
+  duracao: "1 hora",
+  nivel: "Iniciante",
 };
 
 interface PreviaAulaProps {
   titulo: string;
   descricao: string;
   valor: string;
+  duracao: string;
+  nivel: string;
 }
 
-function PreviaAula({ titulo, descricao, valor }: PreviaAulaProps) {
+function PreviaAula({ titulo, descricao, valor, duracao, nivel }: PreviaAulaProps) {
   const [mostrarExemplo, setMostrarExemplo] = useState(false);
 
-  const preenchido = Boolean(titulo.trim() || descricao.trim() || valor);
+  const preenchido = Boolean(titulo.trim() || descricao.trim() || valor || duracao || nivel);
   const exibirExemplo = !preenchido && mostrarExemplo;
 
   const dadosExibidos = exibirExemplo
     ? EXEMPLO
-    : { titulo: titulo.trim(), descricao: descricao.trim(), valor };
+    : { titulo: titulo.trim(), descricao: descricao.trim(), valor, duracao, nivel };
+  const detalhes = [dadosExibidos.nivel, dadosExibidos.duracao].filter(Boolean);
 
   return (
     <section className={styles.cartaoLateral}>
@@ -37,6 +42,7 @@ function PreviaAula({ titulo, descricao, valor }: PreviaAulaProps) {
         <div className={styles.previaPreenchida}>
           <p className={styles.previaTitulo}>{dadosExibidos.titulo || "Título da aula"}</p>
           <p className={styles.previaDescricao}>{dadosExibidos.descricao || "Descrição da aula"}</p>
+          {detalhes.length > 0 ? <p className={styles.previaDescricao}>{detalhes.join(" · ")}</p> : null}
           <p className={styles.previaValor}>{dadosExibidos.valor ? `R$ ${dadosExibidos.valor}` : ""}</p>
         </div>
       ) : (

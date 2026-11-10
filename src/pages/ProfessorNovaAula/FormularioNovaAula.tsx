@@ -70,6 +70,12 @@ function FormularioNovaAula({
 
   function handleSalvarRascunho() {
     if (carregando) return;
+
+    // Um rascunho precisa de pelo menos o título para ser reconhecido na lista.
+    if (!dados.titulo.trim()) {
+      marcarTocado("titulo");
+      return;
+    }
     onSalvarRascunho();
   }
 
