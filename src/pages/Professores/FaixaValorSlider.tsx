@@ -29,6 +29,7 @@ function FaixaValorSlider({ min, max, valorMin, valorMax, onAlterar }: FaixaValo
       </div>
 
       <div className={styles.faixaValorTrilha}>
+        <div className={styles.faixaValorBase} />
         <div
           className={styles.faixaValorPreenchido}
           style={{ left: `${percentualMin}%`, right: `${100 - percentualMax}%` }}

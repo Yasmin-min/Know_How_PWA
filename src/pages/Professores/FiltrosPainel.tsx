@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import { IconFechar, IconEstrela } from "./icons";
-import { IconProfessor as IconMateria, IconCheck } from "../Cadastro/icons";
 import FaixaValorSlider from "./FaixaValorSlider";
 import { criarFiltrosPadrao, obterLimitesValor, obterMateriasDisponiveis } from "./filtros";
 import type { FiltrosState } from "./filtros";
 import type { Professor } from "../../types/professor";
 import styles from "./styles.module.css";
+
+// Acima disso, o filtro de cursos ganha um campo de busca.
+const LIMITE_SEM_BUSCA = 6;
 
 const OPCOES_AVALIACAO = [
   { rotulo: "Qualquer", valor: 0 },
@@ -23,12 +25,17 @@ interface FiltrosPainelProps {
 
 function FiltrosPainel({ professores, filtrosAplicados, onAplicar, onFechar }: FiltrosPainelProps) {
   const [rascunho, setRascunho] = useState<FiltrosState>(filtrosAplicados);
+  const [buscaMateria, setBuscaMateria] = useState("");
 
   useEffect(() => {
     setRascunho(filtrosAplicados);
   }, [filtrosAplicados]);
 
   const materiasDisponiveis = obterMateriasDisponiveis(professores);
+  const termoMateria = buscaMateria.trim().toLowerCase();
+  const materiasFiltradas = termoMateria
+    ? materiasDisponiveis.filter((materia) => materia.toLowerCase().includes(termoMateria))
+    : materiasDisponiveis;
   const { min: valorMinLimite, max: valorMaxLimite } = obterLimitesValor(professores);
 
   function alternarMateria(materia: string) {
@@ -62,24 +69,36 @@ function FiltrosPainel({ professores, filtrosAplicados, onAplicar, onFechar }: F
 
       {materiasDisponiveis.length > 0 ? (
         <div className={styles.filtroSecao}>
-          <h3 className={styles.filtroSecaoTitulo}>Tipo de curso</h3>
-          <div className={styles.opcoesMateria}>
-            {materiasDisponiveis.map((materia) => {
+          <h3 className={styles.filtroSecaoTitulo}>
+            Tipo de curso
+            {rascunho.materias.length > 0 ? (
+              <span className={styles.filtroContador}>{rascunho.materias.length}</span>
+            ) : null}
+          </h3>
+          {materiasDisponiveis.length > LIMITE_SEM_BUSCA ? (
+            <input
+              type="search"
+              className={styles.buscaMateria}
+              placeholder="Buscar curso"
+              value={buscaMateria}
+              onChange={(e) => setBuscaMateria(e.target.value)}
+              aria-label="Buscar tipo de curso"
+            />
+          ) : null}
+          <div className={styles.caixaMaterias} role="group" aria-label="Tipo de curso">
+            {materiasFiltradas.map((materia) => {
               const selecionada = rascunho.materias.includes(materia);
               return (
-                <button
+                <label
                   key={materia}
-                  type="button"
-                  className={`${styles.opcaoMateria} ${selecionada ? styles.opcaoMateriaSelecionada : ""}`}
-                  onClick={() => alternarMateria(materia)}
-                  aria-pressed={selecionada}
+                  className={`${styles.linhaMateria} ${selecionada ? styles.linhaMateriaSelecionada : ""}`}
                 >
-                  <IconMateria className={styles.opcaoMateriaIcone} />
+                  <input type="checkbox" checked={selecionada} onChange={() => alternarMateria(materia)} />
                   <span className={styles.opcaoMateriaTexto}>{materia}</span>
-                  <span className={styles.opcaoMateriaCheck}>{selecionada ? <IconCheck /> : null}</span>
-                </button>
+                </label>
               );
             })}
+            {materiasFiltradas.length === 0 ? <p className={styles.materiasVazio}>Nenhum curso encontrado.</p> : null}
           </div>
         </div>
       ) : null}
